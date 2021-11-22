@@ -72,7 +72,7 @@
     </ul>
 
     <div class="col-md-3 text-end">
-    <button type="button" class="btn btn-link link-dark text-decoration-none me-2">Kontakti</button>
-    <button type="button" class="btn btn-dark me-4">Ieiet</button>
+    <a href="/register" class="btn btn-link link-dark text-decoration-none me-2">Reģistrēties</button>
+    <a href="/login" class="btn btn-dark me-4">Ieiet</a>
     </div>
 </nav>
