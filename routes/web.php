@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,8 +21,6 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['verified'])->name('dashboard');
+Route::get(RouteServiceProvider::HOME, [DashboardController::class, 'show'])->middleware(['verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';

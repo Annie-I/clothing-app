@@ -1,3 +1,8 @@
 body {
-    background-image: url("../images/bg.jpg");
+    background-color: rgb(243, 234, 255);
+}
+
+.login_btn {
+    background-color: rgb(19, 68, 95);
+    color: rgb(248, 242, 245);
 }

@@ -72,7 +72,14 @@
     </ul>
 
     <div class="col-md-3 text-end">
-    <a href="/register" class="btn btn-link link-dark text-decoration-none me-2">Reģistrēties</button>
-    <a href="/login" class="btn btn-dark me-4">Ieiet</a>
+        @if (Auth::guest())
+            <a href="/register" class="btn btn-link link-dark text-decoration-none me-2">Reģistrēties</button>
+            <a href="/login" class="btn login_btn me-4">Pierakstīties</a>
+        @else 
+            <form action="/logout" method="post">
+                @csrf
+                <button type="submit" class="btn login_btn me-4">Izrakstīties</a>
+            </form>
+        @endif
     </div>
 </nav>
