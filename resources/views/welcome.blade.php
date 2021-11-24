@@ -1,6 +1,7 @@
 <x-app-layout>
 
-    <div>
+    <x-slot name="content">
         Sākums!
-    </div>
+    </x-slot>
+
 </x-app-layout>
