@@ -17,8 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes(['verify' => true]);
+
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
