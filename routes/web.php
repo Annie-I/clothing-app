@@ -21,6 +21,12 @@ Route::get('/', function () {
 
 Auth::routes(['verify' => true]);
 
-Route::get(RouteServiceProvider::HOME, [DashboardController::class, 'show'])->middleware(['verified'])->name('dashboard');
+Route::get(RouteServiceProvider::HOME, [DashboardController::class, 'getPublicProfile'])->middleware(['verified'])->name('dashboard');
+
+Route::get('/messages', function () {
+    return view('messages');
+});
+
+Route::get('/change-user-information', [DashboardController::class, 'getUserData'])->middleware(['verified']);
 
 require __DIR__.'/auth.php';

@@ -7,10 +7,19 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function show()
-    {
-        return view('dashboard', [
+    private function getViewWithUserInfo($view) {
+        return view($view, [
             'user' => Auth::user()
         ]);
+    }
+
+    public function getPublicProfile()
+    {
+        return $this->getViewWithUserInfo('dashboard');
+    }
+
+    public function getUserData()
+    {
+        return $this->getViewWithUserInfo('edit-user-data');
     }
 }
