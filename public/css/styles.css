@@ -11,3 +11,17 @@ body {
     background-color: rgb(160, 32, 240);
     color: rgb(248, 242, 245);
 }
+
+.action_btn {
+    background-color: rgb(209, 140, 252);
+    color: rgb(46, 2, 24);
+}
+
+.filler_text {
+    color: rgb(192, 51, 173);
+}
+
+.list-group-item.active {
+    background-color: rgb(209, 140, 252);
+    border: rgb(192, 51, 173);
+}

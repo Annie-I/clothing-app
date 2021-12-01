@@ -78,7 +78,7 @@
         @else 
             <form action="/logout" method="post">
                 @csrf
-                <button type="submit" class="btn login_btn">Izrakstīties</a>
+                <button type="submit" class="btn login_btn mr-3">Izrakstīties</a>
             </form>
         @endif
     </div>

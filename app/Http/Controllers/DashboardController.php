@@ -9,7 +9,8 @@ class DashboardController extends Controller
 {
     private function getViewWithUserInfo($view) {
         return view($view, [
-            'user' => Auth::user()
+            'user' => Auth::user(),
+            'isSeller' => false,
         ]);
     }
 
