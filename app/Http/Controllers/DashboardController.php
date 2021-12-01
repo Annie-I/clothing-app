@@ -20,6 +20,11 @@ class DashboardController extends Controller
 
     public function getUserData()
     {
+        return $this->getViewWithUserInfo('user-data');
+    }
+
+    public function getUserDataForUpdate()
+    {
         return $this->getViewWithUserInfo('edit-user-data');
     }
 }

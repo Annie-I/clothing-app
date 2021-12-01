@@ -27,10 +27,12 @@ Route::get('/messages', function () {
     return view('messages');
 });
 
-Route::get('/change-user-information', [DashboardController::class, 'getUserData'])->middleware(['verified']);
+Route::get('/user-information', [DashboardController::class, 'getUserData'])->middleware(['verified']);
 
 require __DIR__.'/auth.php';
 
 Route::get('/favorites', function () {
     return view('favorites');
 });
+
+Route::get('/edit-user-data', [DashboardController::class, 'getUserDataForUpdate'])->middleware(['verified']);

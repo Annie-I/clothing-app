@@ -7,7 +7,7 @@
                     <x-profile-menu/>
                 </div>
                 <div class="col-12 col-md-9">
-                    <x-edit-user-info :user="$user"/>
+                    <x-user-info :user="$user"/>
                 </div>
             </div>
         </div>
