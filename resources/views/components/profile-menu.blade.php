@@ -1,11 +1,11 @@
 <!-- Dashborad sidebar -->
 <div class="card">
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item"><a href="/dashboard" class="card-title">Publiskais profils</a></li>
-        <li class="list-group-item"><a href="/messages" class="card-title ">Ziņas</a></li>
-        <li class="list-group-item"><a href="/change-user-information" class="card-title">Mani dati</a></li>
-        <li class="list-group-item"><a href="#" class="card-title">Favorītu saraksts</a></li>
-        <li class="list-group-item"><a href="#" class="card-title">Pievienot mantu pārdošanai</a></li>
-        <li class="list-group-item"><a href="#" class="card-title ">Visi mani sludinājumi</a></li>
-    </ul>
+    <nav class="list-group list-group-flush">
+        <a href="/dashboard" class="list-group-item list-group-item-action {{ request()->is('dashboard') ? 'active' : '' }}">Publiskais profils</a>
+        <a href="/messages" class="list-group-item list-group-item-action {{ request()->is('messages') ? 'active' : '' }}">Ziņas</a>
+        <a href="/user-information" class="list-group-item list-group-item-action {{ request()->is('user-information') ? 'active' : '' }}">Mani dati</a>
+        <a href="/favorites" class="list-group-item list-group-item-action {{ request()->is('favorites') ? 'active' : '' }}">Favorītu saraksts</a>
+        <a href="#" class="list-group-item list-group-item-action">Pievienot mantu pārdošanai</a>
+        <a href="#" class="list-group-item list-group-item-action">Visi mani sludinājumi</a>
+    </nav>
 </div>

@@ -30,3 +30,7 @@ Route::get('/messages', function () {
 Route::get('/change-user-information', [DashboardController::class, 'getUserData'])->middleware(['verified']);
 
 require __DIR__.'/auth.php';
+
+Route::get('/favorites', function () {
+    return view('favorites');
+});
