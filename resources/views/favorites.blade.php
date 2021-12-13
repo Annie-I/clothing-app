@@ -6,7 +6,7 @@
                     <x-profile-menu/>
                 </div>
                 <div class="col-12 col-md-9">
-                    <x-user-favorite-list/>
+                    <x-user-favorite-list :userFavorites="$userFavorites"/>
                 </div>
             </div>
         </div>

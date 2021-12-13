@@ -1,14 +1,10 @@
-@php
-    $UserIsInMyFAvoriteList = false;
-@endphp
-
 {{-- User public profile info --}}
 <div class="card">
     <div class="card-body">
         <h2 class="card-title fs-3">
         {{ $user->first_name }} {{ $user->last_name }}
             @if ($user->id !== Auth::id() )
-                @if ($UserIsInMyFAvoriteList)
+                @if ($isFavorited)
                     <button class="btn btn-outline-danger">- Dzēst favorītu</button>
                 @else
                     <button class="btn btn-outline-primary">+ Pievienot favorītiem</button>

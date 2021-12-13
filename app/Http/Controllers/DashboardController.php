@@ -23,7 +23,12 @@ class DashboardController extends Controller
 
     public function getPublicProfile(User $user)
     {
-        return $this->getViewWithUserInfo('dashboard', $user);
+        $favorites = Auth::user()->favorites;
+
+        return view('dashboard', [
+            'user' => $user,
+            'isFavorited' => $favorites->contains($user),
+        ]);
     }
 
     public function getUserData()
@@ -55,5 +60,12 @@ class DashboardController extends Controller
         $user->save();
 
         return redirect('user-information')->with('message', 'Dati atjaunoti veiksmīgi!');
+    }
+
+    public function getUserFavorites()
+    {
+        return view('favorites', [
+            'userFavorites' => Auth::user()->favorites,
+        ]);
     }
 }

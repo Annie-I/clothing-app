@@ -37,9 +37,7 @@ Route::get('/messages', function () {
 Route::get('/user-information', [DashboardController::class, 'getUserData'])->middleware(['verified']);
 
 //User favorite list
-Route::get('/favorites', function () {
-    return view('favorites');
-})->middleware(['verified']);
+Route::get('/favorites', [DashboardController::class, 'getUserFavorites'])->middleware(['verified']);
 
 //To edit user data
 Route::get('/edit-user-information', [DashboardController::class, 'getUserDataForUpdate'])->middleware(['verified']);
