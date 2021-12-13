@@ -17,7 +17,7 @@
         </h2>
 
         @if ( $user->location )
-            <p class="fs-6">Atrodašanās vieta: {{ $user->location }}</p>
+            <p class="fs-6">Atrašanās vieta: {{ $user->location }}</p>
         @endif
         <p class="fs-5 mt-3">Novērtējums: <span class="filler_text">3/5</span></p>
         <p class="fs-5 mt-2">Atsauksmes</p>

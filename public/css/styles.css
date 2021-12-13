@@ -25,3 +25,13 @@ body {
     background-color: rgb(209, 140, 252);
     border: rgb(192, 51, 173);
 }
+
+.form-label {
+    font-size: 16px;
+    color: rgb(83, 81, 81);
+    margin-top: 0.5rem;
+}
+
+.form-control {
+    margin-bottom: 0.5rem;
+}

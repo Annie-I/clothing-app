@@ -15,24 +15,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Landing page
 Route::get('/', function () {
     return view('welcome');
 });
 
 Auth::routes(['verify' => true]);
 
+//User dashboard
 Route::get(RouteServiceProvider::HOME, [DashboardController::class, 'getPublicProfile'])->middleware(['verified'])->name('dashboard');
 
+//User messages
 Route::get('/messages', function () {
     return view('messages');
-});
+})->middleware(['verified']);
 
+//User data
 Route::get('/user-information', [DashboardController::class, 'getUserData'])->middleware(['verified']);
 
-require __DIR__.'/auth.php';
-
+//User favorite list
 Route::get('/favorites', function () {
     return view('favorites');
-});
+})->middleware(['verified']);
 
-Route::get('/edit-user-data', [DashboardController::class, 'getUserDataForUpdate'])->middleware(['verified']);
+//To edit user data
+Route::get('/edit-user-information', [DashboardController::class, 'getUserDataForUpdate'])->middleware(['verified']);
+Route::post('/edit-user-information', [DashboardController::class, 'postUserDataForUpdate'])->middleware(['verified'])->name('user.info.edit');;
+
+require __DIR__.'/auth.php';
