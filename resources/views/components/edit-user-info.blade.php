@@ -3,7 +3,6 @@
     <div class="card-body fs-5">
         <h2 class="card-title fs-3">Labot manus datus</h2>
 
-
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
         <form method="POST" action="{{ route('user.info.edit') }}" class="row">

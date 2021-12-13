@@ -3,31 +3,37 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    private function getViewWithUserInfo($view)
+    private function getViewWithUserInfo($view, $user)
     {
         return view($view, [
-            'user' => Auth::user(),
+            'user' => $user,
             'isSeller' => false,
         ]);
     }
 
-    public function getPublicProfile()
+    public function getUserProfile()
     {
-        return $this->getViewWithUserInfo('dashboard');
+        return $this->getViewWithUserInfo('dashboard', Auth::user());
+    }
+
+    public function getPublicProfile(User $user)
+    {
+        return $this->getViewWithUserInfo('dashboard', $user);
     }
 
     public function getUserData()
     {
-        return $this->getViewWithUserInfo('user-data');
+        return $this->getViewWithUserInfo('user-data', Auth::user());
     }
 
     public function getUserDataForUpdate()
     {
-        return $this->getViewWithUserInfo('edit-user-data');
+        return $this->getViewWithUserInfo('edit-user-data', Auth::user());
     }
 
     public function postUserDataForUpdate(Request $request)

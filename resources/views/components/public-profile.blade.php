@@ -7,7 +7,7 @@
     <div class="card-body">
         <h2 class="card-title fs-3">
         {{ $user->first_name }} {{ $user->last_name }}
-            @if ($user->id === Auth::id() )
+            @if ($user->id !== Auth::id() )
                 @if ($UserIsInMyFAvoriteList)
                     <button class="btn btn-outline-danger">- Dzēst favorītu</button>
                 @else

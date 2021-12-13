@@ -23,7 +23,10 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 //User dashboard
-Route::get(RouteServiceProvider::HOME, [DashboardController::class, 'getPublicProfile'])->middleware(['verified'])->name('dashboard');
+Route::get(RouteServiceProvider::HOME, [DashboardController::class, 'getUserProfile'])->middleware(['verified'])->name('dashboard');
+
+//User profile
+Route::get('/user/{user}', [DashboardController::class, 'getPublicProfile'])->middleware(['verified']);
 
 //User messages
 Route::get('/messages', function () {
