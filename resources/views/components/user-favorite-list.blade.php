@@ -3,7 +3,6 @@
     <div class="card-body">
         <p class="fs-3 m-2">Manu favorītu saraksts</p>
         <div class="row">
-            {{$userFavorites}}
             @foreach ($userFavorites as $favorite)
                 <div class="col-4">
                     <div class="card">

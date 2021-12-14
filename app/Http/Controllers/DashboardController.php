@@ -80,4 +80,24 @@ class DashboardController extends Controller
         Auth::user()->favorites()->detach($user->id);
         return back()->with('message', 'Lietotājs izdzēsts no favorītiem!');
     }
+
+    
+    public function addItemToSale(Request $request)
+    {
+        $request->validate([
+            'itemName' => ['required', 'string', 'max:250'],
+            'itemPicture' => ['required', 'string'],//pievienot max size
+            'description' => ['required', 'string', 'min:10', 'max:2500'],
+        ]);
+
+        $item = Auth::user()->items()->create([
+            'name' => $request->itemName,
+            'image_path' => $request->itemPicture,
+            'description' => $request->description,
+        ]);
+
+        //return redurect('items/{{$item->id}}')
+        return redirect('user-information')->with('message', 'Sludinājums pievienots veiksmīgi!');
+    }
+    
 }
