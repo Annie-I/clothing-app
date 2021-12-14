@@ -7,7 +7,7 @@
                     <x-profile-menu/>
                 </div>
                 <div class="col-12 col-md-9">
-                    <x-public-profile :user="$user" :isFavorited="$isFavorited"/>
+                    <x-public-profile :user="$user" :isFavorited="$isFavorited ?? ''"/>
                 </div>
             </div>
         </div>

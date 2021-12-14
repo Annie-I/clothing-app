@@ -68,4 +68,16 @@ class DashboardController extends Controller
             'userFavorites' => Auth::user()->favorites,
         ]);
     }
+
+    public function addToFavorites(User $user)
+    {
+        Auth::user()->favorites()->attach($user->id);
+        return back()->with('message', 'Lietotājs pievienots favorītiem!');
+    }
+
+    public function removeFromFavorites(User $user)
+    {
+        Auth::user()->favorites()->detach($user->id);
+        return back()->with('message', 'Lietotājs izdzēsts no favorītiem!');
+    }
 }

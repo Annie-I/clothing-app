@@ -1,13 +1,24 @@
 {{-- User public profile info --}}
+@if (session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+@endif
 <div class="card">
     <div class="card-body">
         <h2 class="card-title fs-3">
         {{ $user->first_name }} {{ $user->last_name }}
             @if ($user->id !== Auth::id() )
                 @if ($isFavorited)
-                    <button class="btn btn-outline-danger">- Dzēst favorītu</button>
+                    <form action="/user/{{$user->id}}/remove-from-favorites" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger">- Dzēst favorītu</button>
+                    </form>
                 @else
-                    <button class="btn btn-outline-primary">+ Pievienot favorītiem</button>
+                    <form action="/user/{{$user->id}}/add-to-favorites" method="post">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-primary">+ Pievienot favorītiem</button>
+                    </form>
                 @endif
             @endif
         </h2>

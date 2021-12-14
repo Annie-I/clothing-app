@@ -28,6 +28,12 @@ Route::get(RouteServiceProvider::HOME, [DashboardController::class, 'getUserProf
 //User profile
 Route::get('/user/{user}', [DashboardController::class, 'getPublicProfile'])->middleware(['verified']);
 
+//Add user to favorites
+Route::post('/user/{user}/add-to-favorites', [DashboardController::class, 'addToFavorites'])->middleware(['verified']);
+
+//Remove user from favorites
+Route::post('/user/{user}/remove-from-favorites', [DashboardController::class, 'removeFromFavorites'])->middleware(['verified']);
+
 //User messages
 Route::get('/messages', function () {
     return view('messages');
