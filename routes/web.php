@@ -50,9 +50,7 @@ Route::get('/edit-user-information', [DashboardController::class, 'getUserDataFo
 Route::post('/edit-user-information', [DashboardController::class, 'postUserDataForUpdate'])->middleware(['verified'])->name('user.info.edit');;
 
 //Add item to sale
-Route::get('/add-item', function () {
-    return view('add-item-for-sale');
-})->middleware(['verified']);
+Route::get('/add-item', [DashboardController::class, 'viewFormToAddItemToSale'])->middleware(['verified']);
 
 Route::post('/add-item', [DashboardController::class, 'addItemToSale'])->middleware(['verified'])->name('item.add');
 

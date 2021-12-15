@@ -6,7 +6,7 @@
                     <x-profile-menu/>
                 </div>
                 <div class="col-12 col-md-9">
-                    <x-form-to-add-item/>
+                    <x-form-to-add-item :states="$states"/>
                 </div>
             </div>
         </div>

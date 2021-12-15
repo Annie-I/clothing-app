@@ -14,9 +14,17 @@ class Item extends Model
         'name',
         'image_path',
         'description',
+        'price',
+        'state_id',
     ];
 
-    public function user() {
+    public function users() 
+    {
         return $this->belongsTo(User::class);
+    }
+
+    public function itemStates() 
+    {
+        return $this->hasOne(ItemState::class);
     }
 }

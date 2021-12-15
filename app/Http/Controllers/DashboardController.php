@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Models\ItemState;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -86,7 +87,7 @@ class DashboardController extends Controller
     {
         $request->validate([
             'itemName' => ['required', 'string', 'max:250'],
-            'itemPicture' => ['required', 'image', 'max:10240'],
+            'itemPicture' => ['required', 'image', 'max:10240'], //max image size is 10MB
             'description' => ['required', 'string', 'min:10', 'max:2500'],
         ]);
 
@@ -100,6 +101,15 @@ class DashboardController extends Controller
 
         //return redurect('items/{{$item->id}}')
         return redirect('user-information')->with('message', 'Sludinājums pievienots veiksmīgi!');
+    }
+
+    public function viewFormToAddItemToSale()
+    {
+        $states = ItemState::all();
+
+        return view('add-item-for-sale', [
+            'states' => $states,
+        ]);
     }
     
 }

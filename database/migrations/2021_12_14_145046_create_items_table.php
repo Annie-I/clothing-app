@@ -17,6 +17,9 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
+            //price is stored as euro cents
+            $table->integer('price');
+            $table->foreignId('state_id')->constrained('item_states');
             $table->string('image_path');
             $table->string('description');
             $table->date('sold_at')->nullable();
