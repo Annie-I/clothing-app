@@ -86,13 +86,15 @@ class DashboardController extends Controller
     {
         $request->validate([
             'itemName' => ['required', 'string', 'max:250'],
-            'itemPicture' => ['required', 'string'],//pievienot max size
+            'itemPicture' => ['required', 'image', 'max:10240'],
             'description' => ['required', 'string', 'min:10', 'max:2500'],
         ]);
 
+        $path = $request->file('itemPicture')->store('public/images');
+
         $item = Auth::user()->items()->create([
             'name' => $request->itemName,
-            'image_path' => $request->itemPicture,
+            'image_path' => $path,
             'description' => $request->description,
         ]);
 

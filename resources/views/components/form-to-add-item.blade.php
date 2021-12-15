@@ -5,12 +5,12 @@
 
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('item.add') }}" class="row">
+        <form method="POST" action="{{ route('item.add') }}" class="row" enctype="multipart/form-data">
             @csrf
                 <!-- Item Picture -->
                 <div>
-                    <p>Pievienot bildi:</p>
-                    <input id="itemPicture" class="form-control" type="text" name="itemPicture" required/>
+                    <label for="itemPicture" class="form-label">Pievienot bildi:</label>
+                    <input id="itemPicture" type="file" class="form-control-file" name="itemPicture" required/>
                 </div>
 
                 <!-- Item Name -->
