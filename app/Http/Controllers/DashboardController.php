@@ -86,17 +86,23 @@ class DashboardController extends Controller
     public function addItemToSale(Request $request)
     {
         $request->validate([
-            'itemName' => ['required', 'string', 'max:250'],
-            'itemPicture' => ['required', 'image', 'max:10240'], //max image size is 10MB
+            'name' => ['required', 'string', 'max:250'],
+            'picture' => ['required', 'image', 'max:10240'], //max image size is 10MB
             'description' => ['required', 'string', 'min:10', 'max:2500'],
+            'price' => ['required', 'numeric', 'min:0', 'max:10000'],
+            'state' => ['required', 'integer', 'min:1', 'max:3'], //1 and 3 are state foreign keys 
         ]);
 
-        $path = $request->file('itemPicture')->store('public/images');
+        $path = $request->file('picture')->store('public/images');
+        //convert any price to float with 2 digits after comma and then convert it to euro cents
+        $price = (number_format((float)$request->price, 2, '.', ''))*100;
 
         $item = Auth::user()->items()->create([
-            'name' => $request->itemName,
+            'name' => $request->name,
             'image_path' => $path,
             'description' => $request->description,
+            'price' => $price ,
+            'state_id' => $request->state,
         ]);
 
         //return redurect('items/{{$item->id}}')
