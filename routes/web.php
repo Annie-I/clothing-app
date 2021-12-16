@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ItemController;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -16,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Landing page
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ItemController::class, 'getAllItems']);
 
 Auth::routes(['verify' => true]);
 

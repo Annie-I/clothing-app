@@ -16,6 +16,6 @@ class ItemState extends Model
 
     public function items() 
     {
-        return $this->hasMany(Item::class);
+        return $this->belongTo(Item::class);
     }
 }

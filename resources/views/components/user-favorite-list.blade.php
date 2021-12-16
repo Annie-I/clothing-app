@@ -7,7 +7,7 @@
                 <div class="col-4">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title filler_text">{{$favorite->first_name}} {{$favorite->last_name}}</h5>
+                            <h5 class="card-title">{{$favorite->first_name}} {{$favorite->last_name}}</h5>
                             <p class="card-text filler_text">Kurās kategorijās pārdod mantas.</p>
                             <a href="/user/{{$favorite->id}}" class="btn btn-primary mt-2">Atvērt profilu</a>
                         </div>
