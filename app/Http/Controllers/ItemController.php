@@ -12,8 +12,7 @@ class ItemController extends Controller
 {
     public function getAllItems() {
         return view('welcome', [
-            'items' => Item::all(),
-            'states' => ItemState::all(),
+            'items' => Item::with(['state', 'user'])->get(),
         ]);
     }
 

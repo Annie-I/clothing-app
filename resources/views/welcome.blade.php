@@ -8,17 +8,16 @@
                         @if (empty($items))
                             <p>Pagaidām nav pievienots neviens sludinājums.</p>
                         @else
+                        {{-- make a card for each item --}}
                             @foreach ($items as $item)
                                 <div class="col-3">
-                                    <div class="card">
+                                    <div class="card mb-4">
                                         <img src="{{Storage::url($item->image_path)}}" class="card-img-top">
                                         <div class="card-body">
                                             <h5 class="card-title">{{$item->name}}</h5>
-                                            {{-- TODO: cast back price to eur from eur cents --}}
-                                            <p class="card-text">{{$item->price}} € {{$item->state_id}}</p>
-                                            {{-- dispaly state name --}}
-                                            <p class="card-tex filler_text text-truncate">Lietotāja atrašanās vieta</p>
-                                            {{-- get user location --}}
+                                            {{-- cast back price to eur from eur cents --}}
+                                            <p class="card-text"> {{(number_format((float)($item->price), 2, '.', ''))/100}}€ {{$item->state->name}}</p>
+                                            <p class="card-tex text-truncate">{{$item->user->location ? $item->user->location : 'Atrašanās vieta nav norādīta'}}</p>
                                             <a href="#" class="btn btn-primary mt-2">Apskatīt</a>
                                         </div>
                                     </div>
