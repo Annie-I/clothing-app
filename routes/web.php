@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Landing page
+//Landing page
 Route::get('/', [ItemController::class, 'getAllItems']);
 
 Auth::routes(['verify' => true]);

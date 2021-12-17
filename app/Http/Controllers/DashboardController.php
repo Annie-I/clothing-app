@@ -82,7 +82,6 @@ class DashboardController extends Controller
         return back()->with('message', 'Lietotājs izdzēsts no favorītiem!');
     }
 
-    
     public function addItemToSale(Request $request)
     {
         $request->validate([
