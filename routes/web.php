@@ -53,4 +53,7 @@ Route::get('/add-item', [DashboardController::class, 'viewFormToAddItemToSale'])
 
 Route::post('/add-item', [DashboardController::class, 'addItemToSale'])->middleware(['verified'])->name('item.add');
 
+//View single item
+Route::get('/item/{item}', [ItemController::class, 'getSingleItem'])->middleware(['verified']);
+
 require __DIR__.'/auth.php';

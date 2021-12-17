@@ -11,8 +11,17 @@ use Illuminate\Http\Request;
 class ItemController extends Controller
 {
     public function getAllItems() {
+        // return item view
         return view('welcome', [
             'items' => Item::with(['state', 'user'])->get(),
+        ]);
+    }
+
+    public function getSingleItem(Item $item) {
+        return view('item-info', [
+            'item' => $item,
+            'user' => $item->user,
+            'state' =>$item->state,
         ]);
     }
 

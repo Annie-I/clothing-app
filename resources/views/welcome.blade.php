@@ -18,7 +18,7 @@
                                             {{-- cast back price to eur from eur cents --}}
                                             <p class="card-text"> {{(number_format((float)($item->price), 2, '.', ''))/100}}€ {{$item->state->name}}</p>
                                             <p class="card-tex text-truncate">{{$item->user->location ? $item->user->location : 'Atrašanās vieta nav norādīta'}}</p>
-                                            <a href="#" class="btn btn-primary mt-2">Apskatīt</a>
+                                            <a href="/item/{{$item->id}}" class="btn btn-primary mt-2">Apskatīt</a>
                                         </div>
                                     </div>
                                 </div>

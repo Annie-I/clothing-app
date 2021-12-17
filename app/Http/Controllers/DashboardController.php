@@ -104,8 +104,7 @@ class DashboardController extends Controller
             'state_id' => $request->state,
         ]);
 
-        //return redurect('items/{{$item->id}}')
-        return redirect('user-information')->with('message', 'Sludinājums pievienots veiksmīgi!');
+        return redirect('item/'.$item->id)->with('message', 'Sludinājums pievienots veiksmīgi!');
     }
 
     public function viewFormToAddItemToSale()
