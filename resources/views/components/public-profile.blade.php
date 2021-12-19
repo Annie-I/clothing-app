@@ -29,14 +29,16 @@
         <p class="fs-5 mt-3">Novērtējums: <span class="filler_text">3/5</span></p>
         <p class="fs-5 mt-2">Atsauksmes</p>
         <p class="fs-6 filler_text">Novērtējums<br/>
+        {{-- TODO: Show user reviews --}}
         Atsauksmes pievienošanas laiks + {{ $user->first_name }} {{ $user->last_name }} "pirka / pārdeva mantu"<br/>
         Autora vārds un uzvārds<br/>
             Atsauksmes saturs
         </p>
-        {{-- TODO: Show user reviews --}}
-        <p class="mt-3 filler_text">Šobrīd pārdošanā / Šobrīd pārdošanā nav nevienas mantas / Neesmu šeit lai pārdotu mantas</p>
-        <p class="filler_text">1st item     | 2nd intem    | 3th item     | 4th item</p>
-        {{-- TODO: Show items currently in sale from this person --}}
-        <p><a href="#" class="btn btn-primary me-4 mt-2">Vairāk</a></p>
+        {{-- TODO: Show items currently in sale from this person  --}}
+        @if ($itemCount > 0)
+            <p><a href="#" class="btn btn-primary me-4 mt-2">Rādīt šī lietotāja sludinājumus</a></p>
+        @else
+            <p class="">Šim lietotājam nav aktīvu sludinājumu.</p>
+        @endif
     </div>
 </div>

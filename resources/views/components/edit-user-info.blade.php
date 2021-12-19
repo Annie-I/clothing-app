@@ -27,7 +27,7 @@
                 </div>
                 <!-- Location -->
                 <div>
-                    <label for="location" class="form-label">Atrašanās vieta</label>
+                    <label for="location" class="form-label">Atrašanās vieta (būs redzama sludinājumos un profilā)</label>
                     <input id="location" class="form-control" type="text" name="location" value="{{$user->location}}"/>
                 </div>
             </div>

@@ -6,7 +6,7 @@
 @endif
 <div class="card">
     <div class="card-body fs-5">
-        <p class="col-auto"><a href="/" class="btn btn-info">< Visu sludinājumu saraksts</a></p>
+        <p class="col-auto"><a href="/" class="text-decoration-none text-secondary">< Visu sludinājumu saraksts</a></p>
         <h3></h3>
         <h2 class="card-title fs-3 m-2">{{$item->name}}</h2>
         <div class="row mb-2">

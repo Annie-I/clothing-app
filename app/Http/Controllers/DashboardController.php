@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Models\Item;
 use App\Models\ItemState;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,9 +12,11 @@ class DashboardController extends Controller
 {
     private function getViewWithUserInfo($view, $user)
     {
+        $itemCount = $user->items->count();
+
         return view($view, [
             'user' => $user,
-            'isSeller' => false,
+            'itemCount' => $itemCount,
         ]);
     }
 
@@ -26,9 +29,12 @@ class DashboardController extends Controller
     {
         $favorites = Auth::user()->favorites;
 
+        $itemCount = $user->items->count();
+
         return view('dashboard', [
             'user' => $user,
             'isFavorited' => $favorites->contains($user),
+            'itemCount' => $itemCount,
         ]);
     }
 
