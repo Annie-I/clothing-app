@@ -23,7 +23,7 @@
                 <div>
                     <p class="form-label"> Mantas stāvoklis </p>
                     @foreach ($states as $state)
-                        <div class="form-check form-check-inline">
+                        <div class="form-check form-check-inline fs-6">
                             <input class="form-check-input" type="radio" name="state" id="state{{$state->id}}" value="{{$state->id}}">
                             <label class="form-check-label" for="state{{$state->id}}">{{$state->name}}</label>
                         </div>
@@ -49,7 +49,7 @@
             <div class="container">
                 <div class="row mt-3">
                     <p class="col-auto"><button type="submit" class="btn btn-success">Pievienot pārdošanai</button></p>
-                    <p class="col-auto"><a href="/dashboard" class="btn btn-secondary">Atcelt</a></p>
+                    <p class="col-auto"><a href="/dashboard" class="btn btn-danger">Atcelt</a></p>
                 </div>
             </div>
         </form>

@@ -24,26 +24,27 @@
                 <img src="{{Storage::url($item->image_path)}}">
             </div>
         </div>
-        </div class="row">
+        <div class="row">
             @if (Auth::user()->id === $item->user_id)
-                <p class="col-auto"><a href="$" class="btn btn-primary">Labot sludinājumu</a></p>
+            <div class="col-auto">
+                <p><a href="$" class="btn btn-primary">Labot sludinājumu</a></p>
+            </div>
+            <div class="col-auto">
                 <form 
                 {{-- action="/logout" method="post" class="col-auto" --}}
                 >
                     @csrf
-                    <div class="col-auto">
-                        <button type="submit" class="btn btn-danger mb-2">Dzēst sludinājumu</p>
-                    </div>
+                    <button type="submit" class="btn btn-danger">Dzēst sludinājumu</p>
                 </form>
-
+            </div>
+            <div class="col-auto">
                 <form 
                     {{-- action="" --}}
                     >
                     @csrf
-                    <div class="col-auto">
-                        <button type="submit" class="btn btn-secondary mb-2">Atzīmēt mantu kā pārdotu</p>
-                    </div>
+                    <button type="submit" class="btn btn-secondary">Atzīmēt kā pārdotu</p>
                 </form>
+            </div>
             @else
                 <p class="col-auto"><a href="#" class="btn btn-primary">Sūtīt ziņu pārdevējam</a></p>
                 <p class="col-auto"><a href="/user/{{$user->id}}" class="btn btn-secondary">Apskatīt pārdevēja profilu</a></p>

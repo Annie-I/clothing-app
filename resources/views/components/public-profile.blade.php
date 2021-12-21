@@ -8,6 +8,7 @@
     <div class="card-body">
         <h2 class="card-title fs-3">
         {{ $user->first_name }} {{ $user->last_name }}
+        {{-- add / remove from favorite list --}}
             @if ($user->id !== Auth::id() )
                 @if ($isFavorited)
                     <form action="/user/{{$user->id}}/remove-from-favorites" method="post">
@@ -22,23 +23,19 @@
                 @endif
             @endif
         </h2>
-
+        {{-- User location --}}
         @if ( $user->location )
             <p class="fs-6">Atrašanās vieta: {{ $user->location }}</p>
         @endif
-        <p class="fs-5 mt-3">Novērtējums: <span class="filler_text">3/5</span></p>
-        <p class="fs-5 mt-2">Atsauksmes</p>
-        <p class="fs-6 filler_text">Novērtējums<br/>
-        {{-- TODO: Show user reviews --}}
-        Atsauksmes pievienošanas laiks + {{ $user->first_name }} {{ $user->last_name }} "pirka / pārdeva mantu"<br/>
-        Autora vārds un uzvārds<br/>
-            Atsauksmes saturs
-        </p>
-        {{-- TODO: Show items currently in sale from this person  --}}
+        {{-- Button to view user ads if there are any--}}
         @if ($itemCount > 0)
-            <p><a href="#" class="btn btn-primary me-4 mt-2">Rādīt šī lietotāja sludinājumus</a></p>
+            <p><a href="#" class="btn btn-primary me-4 mt-2">Lietotāja sludinājumi</a></p>
         @else
             <p class="">Šim lietotājam nav aktīvu sludinājumu.</p>
         @endif
+        <p class="fs-5 mt-3">Vidējais novērtējums: <span class="filler_text">3/5</span></p>
+        {{-- Button to view user reviews if there are any--}}
+        <p><a href="#" class="btn btn-primary me-4">Par lietotāju atstātās atsauksmes</a></p>
+        </div>
     </div>
 </div>
