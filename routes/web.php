@@ -56,4 +56,7 @@ Route::post('/add-item', [DashboardController::class, 'addItemToSale'])->middlew
 //View single item
 Route::get('/item/{item}', [ItemController::class, 'getSingleItem'])->middleware(['verified']);
 
+//Delete single item
+Route::post('/item/{item}/delete', [ItemController::class, 'deleteItem'])->middleware(['verified'])->name('item.delete');
+
 require __DIR__.'/auth.php';

@@ -4,6 +4,11 @@
         {{ session('message') }}
     </div>
 @endif
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 <div class="card">
     <div class="card-body fs-5">
         <p class="col-auto"><a href="/" class="text-decoration-none text-secondary">< Visu sludinājumu saraksts</a></p>
@@ -30,9 +35,7 @@
                 <p><a href="$" class="btn btn-primary">Labot sludinājumu</a></p>
             </div>
             <div class="col-auto">
-                <form 
-                {{-- action="/logout" method="post" class="col-auto" --}}
-                >
+                <form action="{{ route('item.delete', $item->id) }}" method="post">
                     @csrf
                     <button type="submit" class="btn btn-danger">Dzēst sludinājumu</p>
                 </form>
