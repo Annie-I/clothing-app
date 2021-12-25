@@ -1,4 +1,4 @@
-{{-- Edit user info --}}
+{{-- Edit item --}}
 <div class="card">
     <div class="card-body fs-5">
         <h2 class="card-title fs-3">Labot pārdošanā esošo mantu</h2>

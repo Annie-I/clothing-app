@@ -1,4 +1,4 @@
-{{-- Edit user info --}}
+{{-- Add item to sale--}}
 <div class="card">
     <div class="card-body fs-5">
         <h2 class="card-title fs-3">Pievienot mantu pārdošanai</h2>
