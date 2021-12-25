@@ -97,4 +97,12 @@ class ItemController extends Controller
             'userItems' => Auth::user()->items->whereNotNull('sold_at'),
         ]);
     }
+
+    public function getSelectedUserItems(User $user)
+    {
+        return view('any-user-active-items', [
+            'userItems' => $user->items->whereNull('sold_at'),
+            'user' => $user,
+        ]);
+    }
 }

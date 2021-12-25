@@ -29,7 +29,7 @@
         @endif
         {{-- Button to view user ads if there are any--}}
         @if ($itemCount > 0)
-            <p><a href="#" class="btn btn-primary me-4 mt-2">Lietotāja sludinājumi</a></p>
+            <p><a href="/user/{{$user->id}}/active-items" class="btn btn-primary me-4 mt-2">Lietotāja sludinājumi</a></p>
         @else
             <p class="">Šim lietotājam nav aktīvu sludinājumu.</p>
         @endif

@@ -70,4 +70,7 @@ Route::post('/item/{item}/update-sale-status', [ItemController::class, 'changeIt
 Route::get('/my-active-items', [ItemController::class, 'getUserActiveItems'])->middleware(['verified']);
 Route::get('/my-sold-items', [ItemController::class, 'getUserSoldItems'])->middleware(['verified']);
 
+//Any user active item list
+Route::get('/user/{user}/active-items', [ItemController::class, 'getSelectedUserItems'])->middleware(['verified']);
+
 require __DIR__.'/auth.php';
