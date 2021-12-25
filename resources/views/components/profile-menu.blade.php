@@ -6,6 +6,6 @@
         <a href="/user-information" class="list-group-item list-group-item-action {{ request()->is('user-information') ? 'active' : '' }}">Lietotāja informācija</a>
         <a href="/favorites" class="list-group-item list-group-item-action {{ request()->is('favorites') ? 'active' : '' }}">Favorītu saraksts</a>
         <a href="/add-item" class="list-group-item list-group-item-action {{ request()->is('add-item') ? 'active' : '' }}">Pievienot mantu pārdošanai</a>
-        <a href="#" class="list-group-item list-group-item-action">Mani sludinājumi</a>
+        <a href="/my-active-items" class="list-group-item list-group-item-action {{ request()->is('user-item-list') ? 'active' : '' }}">Mani sludinājumi</a>
     </nav>
 </div>

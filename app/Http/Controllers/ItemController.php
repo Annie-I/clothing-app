@@ -82,4 +82,19 @@ class ItemController extends Controller
         return back()->with('message', 'Sludinājuma statuss ir veiksmīgi nomainīts!');
 
     }
+
+    public function getUserActiveItems()
+    {
+        return view('user-active-item-list', [
+            'userItems' => Auth::user()->items->whereNull('sold_at'),
+        ]);
+    }
+
+    
+    public function getUserSoldItems()
+    {
+        return view('user-sold-item-list', [
+            'userItems' => Auth::user()->items->whereNotNull('sold_at'),
+        ]);
+    }
 }

@@ -66,4 +66,8 @@ Route::post('/item/{item}/edit', [ItemController::class, 'postItemDataForUpdate'
 //Mark single item as sold
 Route::post('/item/{item}/update-sale-status', [ItemController::class, 'changeItemSaleStatus'])->middleware(['verified'])->name('item.sale.status');
 
+//User item list
+Route::get('/my-active-items', [ItemController::class, 'getUserActiveItems'])->middleware(['verified']);
+Route::get('/my-sold-items', [ItemController::class, 'getUserSoldItems'])->middleware(['verified']);
+
 require __DIR__.'/auth.php';
