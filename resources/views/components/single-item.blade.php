@@ -41,11 +41,14 @@
                 </form>
             </div>
             <div class="col-auto">
-                <form 
-                    {{-- action="" --}}
+                <form method="POST" action="{{route('item.sale.status', $item->id)}}"
                     >
                     @csrf
-                    <button type="submit" class="btn btn-secondary">Atzīmēt kā pārdotu</p>
+                    @if ($item->sold_at)
+                        <button type="submit" class="btn btn-secondary">Ievietot pārdošanā</p>
+                    @else
+                        <button type="submit" class="btn btn-secondary">Atzīmēt kā pārdotu</p>
+                    @endif
                 </form>
             </div>
             @else

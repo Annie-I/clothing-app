@@ -10,18 +10,20 @@
                         @else
                         {{-- make a card for each item --}}
                             @foreach ($items as $item)
-                                <div class="col-3">
-                                    <div class="card mb-4">
-                                        <img src="{{Storage::url($item->image_path)}}" class="card-img-top">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{$item->name}}</h5>
-                                            {{-- cast back price to eur from eur cents --}}
-                                            <p class="card-text">{{$item->state->name}} <span class="text-secondary">|</span> {{(number_format((float)($item->price), 2, '.', ''))/100}}€ </p>
-                                            <p class="card-tex text-truncate">{{$item->user->location ? $item->user->location : 'Atrašanās vieta nav norādīta'}}</p>
-                                            <a href="/item/{{$item->id}}" class="btn btn-primary mt-2">Apskatīt</a>
+                                @if (is_null($item->sold_at))
+                                    <div class="col-3">
+                                        <div class="card mb-4">
+                                            <img src="{{Storage::url($item->image_path)}}" class="card-img-top">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{$item->name}}</h5>
+                                                {{-- cast back price to eur from eur cents --}}
+                                                <p class="card-text">{{$item->state->name}} <span class="text-secondary">|</span> {{(number_format((float)($item->price), 2, '.', ''))/100}}€ </p>
+                                                <p class="card-tex text-truncate">{{$item->user->location ? $item->user->location : 'Atrašanās vieta nav norādīta'}}</p>
+                                                <a href="/item/{{$item->id}}" class="btn btn-primary mt-2">Apskatīt</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
                             @endforeach
                         @endif
                     </div>

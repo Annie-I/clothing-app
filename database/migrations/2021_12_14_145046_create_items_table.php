@@ -22,7 +22,7 @@ class CreateItemsTable extends Migration
             $table->foreignId('state_id')->constrained('item_states');
             $table->string('image_path');
             $table->string('description');
-            $table->date('sold_at')->nullable();
+            $table->timestamp('sold_at')->nullable();
             $table->timestamps();
         });
     }

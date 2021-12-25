@@ -6,6 +6,7 @@ use Auth;
 use App\Models\Item;
 use App\Models\ItemState;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -17,8 +18,7 @@ class ItemController extends Controller
         ]);
     }
 
-    public fu
-    nction getSingleItem(Item $item) {
+    public function getSingleItem(Item $item) {
         return view('item-info', [
             'item' => $item,
             'user' => $item->user,
@@ -68,5 +68,18 @@ class ItemController extends Controller
         $item->save();
 
     return redirect('item/'.$item->id)->with('message', 'Sludinājums veiksmīgi atjaunots!');
+    }
+
+    public function changeItemSaleStatus(Item $item) {
+        if ($item->sold_at) {
+            $item->sold_at = NULL;
+        } else {
+            $item->sold_at = Carbon::now();
+        }
+
+        $item->save();
+
+        return back()->with('message', 'Sludinājuma statuss ir veiksmīgi nomainīts!');
+
     }
 }
