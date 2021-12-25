@@ -32,10 +32,10 @@
         <div class="row">
             @if (Auth::user()->id === $item->user_id)
             <div class="col-auto">
-                <p><a href="$" class="btn btn-primary">Labot sludinājumu</a></p>
+                <p><a href="{{route('item.edit', $item->id)}}" class="btn btn-primary">Labot sludinājumu</a></p>
             </div>
             <div class="col-auto">
-                <form action="{{ route('item.delete', $item->id) }}" method="post">
+                <form action="{{route('item.delete', $item->id)}}" method="post">
                     @csrf
                     <button type="submit" class="btn btn-danger">Dzēst sludinājumu</p>
                 </form>

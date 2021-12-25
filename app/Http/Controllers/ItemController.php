@@ -17,7 +17,8 @@ class ItemController extends Controller
         ]);
     }
 
-    public function getSingleItem(Item $item) {
+    public fu
+    nction getSingleItem(Item $item) {
         return view('item-info', [
             'item' => $item,
             'user' => $item->user,
@@ -35,5 +36,37 @@ class ItemController extends Controller
         }
 
         return back()->with('error', 'Jūs nevarat izdzēst šo sludinājumu!');
+    }
+
+    public function getItemDataForUpdate(Item $item) {
+        return view('edit-item-for-sale', [
+            'item' => $item,
+            'states' => ItemState::all(),
+        ]);
+    }
+
+    public function postItemDataForUpdate(Item $item, Request $request) {
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:250'],
+            'picture' => ['required', 'image', 'max:10240'], //max image size is 10MB
+            'description' => ['required', 'string', 'min:10', 'max:2500'],
+            'price' => ['required', 'numeric', 'min:0', 'max:10000'],
+            'state' => ['required', 'integer', 'min:1', 'max:3'], //1 and 3 are state foreign keys 
+        ]);
+
+        $path = $request->file('picture')->store('public/images');
+        //convert any price to float with 2 digits after comma and then convert it to euro cents
+        $price = (number_format((float)$request->price, 2, '.', ''))*100;
+
+        $item->name = $request->name;
+        $item->image_path = $path;
+        $item->description = $request->description;
+        $item->price = $price ;
+        $item->state_id= $request->state;
+
+        $item->save();
+
+    return redirect('item/'.$item->id)->with('message', 'Sludinājums veiksmīgi atjaunots!');
     }
 }

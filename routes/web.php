@@ -59,4 +59,8 @@ Route::get('/item/{item}', [ItemController::class, 'getSingleItem'])->middleware
 //Delete single item
 Route::post('/item/{item}/delete', [ItemController::class, 'deleteItem'])->middleware(['verified'])->name('item.delete');
 
+//Edit signle item
+Route::get('/item/{item}/edit', [ItemController::class, 'getItemDataForUpdate'])->middleware(['verified'])->name('item.edit');
+Route::post('/item/{item}/edit', [ItemController::class, 'postItemDataForUpdate'])->middleware(['verified'])->name('item.update');
+
 require __DIR__.'/auth.php';
