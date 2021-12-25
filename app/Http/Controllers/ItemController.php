@@ -14,7 +14,7 @@ class ItemController extends Controller
     public function getAllItems() {
         // return item view
         return view('welcome', [
-            'items' => Item::with(['state', 'user'])->get(),
+            'items' => Item::with(['state', 'user'])->whereNull('sold_at')->get(),
         ]);
     }
 
