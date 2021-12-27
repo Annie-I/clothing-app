@@ -1,5 +1,10 @@
 <x-app-layout>
     <x-slot name="content">
+        @if (session('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
         <div class="container">
             <div class="card">
                 <div class="card-body">
