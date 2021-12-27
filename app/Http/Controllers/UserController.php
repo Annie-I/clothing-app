@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Models\User;
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -18,6 +19,8 @@ class UserController extends Controller
             $request->session()->regenerateToken();
             
             $user->delete();
+
+            Item::where('user_id', $user->id)->delete();
             // TODO: add delete for all user related stuff
 
             return redirect('/')->with('message', 'Lietotāja konts izdzēsts!');
