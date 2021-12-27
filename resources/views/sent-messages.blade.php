@@ -8,16 +8,17 @@
                 <div class="col-12 col-md-9">
                     <div class="card">
                         <div class="card-body">
-                            <h2 class="card-title fs-3 m-2">Manu sludinājumu saraksts</h2>
+                            <h2 class="card-title fs-3 m-2">Ziņas</h2>
                             <ul class="nav nav-tabs mb-2">
                                 <li class="nav-item">
-                                    <a class="nav-link active" href="/my-active-items">Aktīvie sludinājumi</a>
+                                    <a class="nav-link text-secondary" href="/received-messages">Saņemtās ziņas</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-secondary" href="/my-sold-items">Pārdotās mantas</a>
+                                    <a class="nav-link active" href="/sent-messages">Nosūtītās ziņas</a>
                                 </li>
                             </ul>
-                    <x-item-list :userItems="$userItems"/>
+                    <x-mailbox/>
+                    {{-- :userMessages="$userMessages" --}}
                 </div>
             </div>
         </div>
