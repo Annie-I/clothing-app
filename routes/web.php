@@ -36,10 +36,7 @@ Route::post('/user/{user}/remove-from-favorites', [DashboardController::class, '
 
 //User messages
 Route::get('/received-messages', [DashboardController::class, 'getUserReceivedMessages'])->middleware(['verified']);
-
-Route::get('/sent-messages', function () {
-    return view('sent-messages');
-})->middleware(['verified']);
+Route::get('/sent-messages', [DashboardController::class, 'getUserSentMessages'])->middleware(['verified']);
 
 //User data
 Route::get('/user-information', [DashboardController::class, 'getUserData'])->middleware(['verified']);

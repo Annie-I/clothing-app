@@ -118,4 +118,12 @@ class DashboardController extends Controller
             'userMessages' => Message::all()->where('receiver_id', $user->id),
         ]);
     }
+
+    public function getUserSentMessages()
+    {
+        $user = Auth::user();
+        return view('sent-messages', [
+            'userMessages' => Message::all()->where('sender_id', $user->id),
+        ]);
+    }
 }

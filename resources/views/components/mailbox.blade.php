@@ -5,10 +5,14 @@
     @endif
     @foreach ($userMessages as $message)
         <div>
-            <li class="list-group-item filler_text">{{$message->title}}</li>
-            <li class="list-group-item filler_text">Ziņa 2</li>
-            <li class="list-group-item filler_text">Ziņa 3</li>
-            <li class="list-group-item filler_text">Ziņa 4</li>
+            <li class="list-group-item">
+                @if ($message->sender_id === Auth::user()->id)
+                    <p>Kam: {{$message->receiver_id}}</p>
+                @else
+                    <p>No: {{$message->sender_id}}</p>
+                @endif
+                <p class="text-truncate">{{$message->title}}</p>
+            </li>
         </div>
     @endforeach
 </div>
