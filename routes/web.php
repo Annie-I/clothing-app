@@ -76,4 +76,8 @@ Route::get('/my-sold-items', [ItemController::class, 'getUserSoldItems'])->middl
 //Any user active item list
 Route::get('/user/{user}/active-items', [ItemController::class, 'getSelectedUserItems'])->middleware(['verified']);
 
+//Write and send a message to any user
+Route::get('/user/{user}/compose-message', [DashboardController::class, 'viewFormToComposeMessage'])->middleware(['verified']);
+Route::post('/user/{user}/compose-message', [DashboardController::class, 'sendMessage'])->middleware(['verified'])->name('message.send');
+
 require __DIR__.'/auth.php';

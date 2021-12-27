@@ -7,6 +7,7 @@ use App\Models\Item;
 use App\Models\ItemState;
 use App\Models\Message;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -118,12 +119,38 @@ class DashboardController extends Controller
             'userMessages' => Message::all()->where('receiver_id', $user->id),
         ]);
     }
-
+    
     public function getUserSentMessages()
     {
         $user = Auth::user();
         return view('sent-messages', [
             'userMessages' => Message::all()->where('sender_id', $user->id),
         ]);
+    }
+
+    public function viewFormToComposeMessage(User $user)
+    {
+        return view('compose-message', [
+            'user' => $user,
+        ]);
+    }
+
+    public function sendMessage(Request $request, User $user)
+    {
+        $request->validate([
+        'title' => ['required', 'string', 'min:5', 'max:150'],
+        'content' => ['required', 'string', 'min:10', 'max:1500'],
+        ]);
+
+        $sender = Auth::user();
+
+        $message = Auth::user()->messages()->create([
+            // 'sender_id' => $sender->id,
+            'receiver_id' => $user->id,
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+
+        return redirect('/sent-messages')->with('message', 'Ziņa nosūtīta!');
     }
 }

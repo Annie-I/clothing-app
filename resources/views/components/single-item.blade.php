@@ -11,7 +11,7 @@
 @endif
 <div class="card">
     <div class="card-body fs-5">
-        <p class="col-auto"><a href="/" class="text-decoration-none text-secondary">< Visu sludinājumu saraksts</a></p>
+        <p class="col-auto"><a href="/" class="text-decoration-none text-secondary">Visu sludinājumu saraksts</a></p>
         <h3></h3>
         <h2 class="card-title fs-3 m-2">{{$item->name}}</h2>
         <div class="row mb-2">
@@ -52,7 +52,7 @@
                 </form>
             </div>
             @else
-                <p class="col-auto"><a href="#" class="btn btn-primary">Sūtīt ziņu pārdevējam</a></p>
+                <p class="col-auto"><a href="/user/{{$user->id}}/compose-message" class="btn btn-primary">Sūtīt ziņu pārdevējam</a></p>
                 <p class="col-auto"><a href="/user/{{$user->id}}" class="btn btn-secondary">Apskatīt pārdevēja profilu</a></p>
             @endif
         </div>

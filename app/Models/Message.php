@@ -11,8 +11,10 @@ class Message extends Model
     use HasFactory;
 
     protected $fillable = [
+        'sender_id',
+        'receiver_id',
         'title',
-        'contents',
+        'content',
     ];
 
     // public function sender() 
