@@ -25,19 +25,6 @@ class DashboardController extends Controller
         return $this->getViewWithUserInfo('dashboard', Auth::user());
     }
 
-    public function getPublicProfile(User $user)
-    {
-        $favorites = Auth::user()->favorites;
-
-        $itemCount = $user->items->count();
-
-        return view('dashboard', [
-            'user' => $user,
-            'isFavorited' => $favorites->contains($user),
-            'itemCount' => $itemCount,
-        ]);
-    }
-
     public function getUserData()
     {
         return $this->getViewWithUserInfo('user-data', Auth::user());

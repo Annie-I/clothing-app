@@ -9,6 +9,19 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function getPublicProfile(User $user)
+    {
+        $favorites = Auth::user()->favorites;
+
+        $itemCount = $user->items->count();
+
+        return view('user-profile', [
+            'user' => $user,
+            'isFavorited' => $favorites->contains($user),
+            'itemCount' => $itemCount,
+        ]);
+    }
+
     public function deleteUser(User $user, Request $request) {
         if ($user->id === Auth::id()) 
         {
@@ -21,7 +34,6 @@ class UserController extends Controller
             $user->delete();
 
             Item::where('user_id', $user->id)->delete();
-            // TODO: add delete for all user related stuff
 
             return redirect('/')->with('message', 'Lietotāja konts izdzēsts!');
         }

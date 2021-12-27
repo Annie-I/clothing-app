@@ -26,7 +26,7 @@ Auth::routes(['verify' => true]);
 Route::get(RouteServiceProvider::HOME, [DashboardController::class, 'getUserProfile'])->middleware(['verified'])->name('dashboard');
 
 //User profile
-Route::get('/user/{user}', [DashboardController::class, 'getPublicProfile'])->middleware(['verified']);
+Route::get('/user/{user}', [UserController::class, 'getPublicProfile'])->middleware(['verified']);
 
 //Add user to favorites
 Route::post('/user/{user}/add-to-favorites', [DashboardController::class, 'addToFavorites'])->middleware(['verified']);
