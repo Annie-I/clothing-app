@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\UserController;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -46,7 +47,10 @@ Route::get('/favorites', [DashboardController::class, 'getUserFavorites'])->midd
 
 //To edit user data
 Route::get('/edit-user-information', [DashboardController::class, 'getUserDataForUpdate'])->middleware(['verified']);
-Route::post('/edit-user-information', [DashboardController::class, 'postUserDataForUpdate'])->middleware(['verified'])->name('user.info.edit');;
+Route::post('/edit-user-information', [DashboardController::class, 'postUserDataForUpdate'])->middleware(['verified'])->name('user.info.edit');
+
+//Delete user
+Route::post('/user/{user}/delete', [UserController::class, 'deleteUser'])->middleware(['verified'])->name('user.delete');
 
 //Add item to sale
 Route::get('/add-item', [DashboardController::class, 'viewFormToAddItemToSale'])->middleware(['verified']);
