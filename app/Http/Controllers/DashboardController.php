@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\Item;
 use App\Models\ItemState;
+use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -109,4 +110,12 @@ class DashboardController extends Controller
         ]);
     }
     
+
+    public function getUserReceivedMessages()
+    {
+        $user = Auth::user();
+        return view('received-messages', [
+            'userMessages' => Message::all()->where('receiver_id', $user->id),
+        ]);
+    }
 }

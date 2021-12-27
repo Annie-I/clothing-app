@@ -17,8 +17,7 @@
                                     <a class="nav-link text-secondary" href="/sent-messages">Nosūtītās ziņas</a>
                                 </li>
                             </ul>
-                    <x-mailbox/>
-                    {{-- :userMessages="$userMessages" --}}
+                    <x-mailbox :userMessages="$userMessages"/>
                 </div>
             </div>
         </div>
