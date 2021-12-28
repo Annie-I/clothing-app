@@ -164,6 +164,15 @@ class DashboardController extends Controller
 
     public function viewSingleMessage(Message $message)
     {
+        if ($message->sender_id !==  Auth::id() && $message->receiver_id !==  Auth::id()) {
+            abort(404);
+        }
+
+        if (!$message->read_at && $message->receiver_id === Auth::id()) {
+            $message->read_at = Carbon::now();
+            $message->save();
+        }
+
         return view('message-info', [
             'message' => $message,
         ]);
