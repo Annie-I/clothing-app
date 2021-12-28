@@ -11,7 +11,7 @@
                 @else
                     <p>No: {{$message->sender->first_name}} {{$message->sender->last_name}}</p>
                 @endif
-                <p class="text-truncate">{{$message->title}}</p>
+                <a href="/message/{{$message->id}}/read" class="fw-bold text-truncate">{{$message->title}}</a>
             </li>
         </div>
     @endforeach

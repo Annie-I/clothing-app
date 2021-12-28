@@ -116,7 +116,11 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         return view('received-messages', [
-            'userMessages' => Message::with(['sender'])->where('receiver_id', $user->id)->get(),
+            'userMessages' => Message::with(['sender'])
+            ->where('receiver_id', $user->id)
+            ->whereNull('receiver_deleted_at')
+            ->orderBy('created_at', 'DESC')
+            ->get(),
         ]);
     }
     
@@ -124,7 +128,11 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         return view('sent-messages', [
-            'userMessages' => Message::with(['receiver'])->where('sender_id', $user->id)->get(),
+            'userMessages' => Message::with(['receiver'])
+            ->where('sender_id', $user->id)
+            ->whereNull('sender_deleted_at')
+            ->orderBy('created_at', 'DESC')
+            ->get(),
         ]);
     }
 
@@ -153,4 +161,28 @@ class DashboardController extends Controller
 
         return redirect('/sent-messages')->with('message', 'Ziņa nosūtīta!');
     }
+
+    public function viewSingleMessage(Message $message)
+    {
+        return view('message-info', [
+            'message' => $message,
+        ]);
+    }
+
+    public function deleteSentMessage(Message $message)
+    {
+        $message->sender_deleted_at = Carbon::now();
+        $message->save();
+
+        return redirect('/sent-messages')->with('message', 'Ziņa veiksmīgi izdzēsta no jūsu pastkastītes!');
+    }
+    
+    public function deleteReceivedMessage(Message $message)
+    {
+        $message->receiver_deleted_at = Carbon::now();
+        $message->save();
+
+        return redirect('/received-messages')->with('message', 'Ziņa veiksmīgi izdzēsta no jūsu pastkastītes!');
+    }
+
 }

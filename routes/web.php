@@ -80,4 +80,9 @@ Route::get('/user/{user}/active-items', [ItemController::class, 'getSelectedUser
 Route::get('/user/{user}/compose-message', [DashboardController::class, 'viewFormToComposeMessage'])->middleware(['verified']);
 Route::post('/user/{user}/compose-message', [DashboardController::class, 'sendMessage'])->middleware(['verified'])->name('message.send');
 
+//View message
+Route::get('/message/{message}/read', [DashboardController::class, 'viewSingleMessage'])->middleware(['verified']);
+Route::post('/message/{message}/deleteSent', [DashboardController::class, 'deleteSentMessage'])->middleware(['verified'])->name('sent.message.delete');
+Route::post('/message/{message}/deleteReceived', [DashboardController::class, 'deleteReceivedMessage'])->middleware(['verified'])->name('received.message.delete');
+
 require __DIR__.'/auth.php';

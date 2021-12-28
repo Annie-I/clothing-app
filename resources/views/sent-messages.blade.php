@@ -9,7 +9,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h2 class="card-title fs-3 m-2">Ziņas</h2>
-                            {{-- block to show messages --}}
+                            {{-- block to show success messages --}}
                             @if (session('message'))
                                 <div class="alert alert-success">
                                     {{ session('message') }}
