@@ -116,7 +116,7 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         return view('received-messages', [
-            'userMessages' => Message::all()->where('receiver_id', $user->id),
+            'userMessages' => Message::with(['sender'])->where('receiver_id', $user->id)->get(),
         ]);
     }
     
@@ -124,7 +124,7 @@ class DashboardController extends Controller
     {
         $user = Auth::user();
         return view('sent-messages', [
-            'userMessages' => Message::all()->where('sender_id', $user->id),
+            'userMessages' => Message::with(['receiver'])->where('sender_id', $user->id)->get(),
         ]);
     }
 

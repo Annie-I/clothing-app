@@ -7,9 +7,9 @@
         <div>
             <li class="list-group-item">
                 @if ($message->sender_id === Auth::user()->id)
-                    <p>Kam: {{$message->receiver_id}}</p>
+                    <p>Kam: {{$message->receiver->first_name}} {{$message->receiver->last_name}}</p>
                 @else
-                    <p>No: {{$message->sender_id}}</p>
+                    <p>No: {{$message->sender->first_name}} {{$message->sender->last_name}}</p>
                 @endif
                 <p class="text-truncate">{{$message->title}}</p>
             </li>
