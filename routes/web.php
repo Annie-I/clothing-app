@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
@@ -91,4 +92,9 @@ Route::get('/blocked-users', [UserController::class, 'getBlockedUsers'])->middle
 //Block / unblock user
 Route::post('/user/{user}/block-user', [UserController::class, 'blockUser'])->middleware(['verified'])->name('user.block');  //add EnsureIsAdmin middleware
 Route::post('/user/{user}/unblock-user', [UserController::class, 'unblockUser'])->middleware(['verified'])->name('user.unblock');  //add EnsureIsAdmin middleware
+
+//Write and send a complait to administration
+Route::get('/compose-complaint', [ComplaintController::class, 'viewFormToComposeComplaint'])->middleware(['verified']);
+Route::post('/compose-complaint', [ComplaintController::class, 'postComplaint'])->middleware(['verified'])->name('complaint.send');
+
 require __DIR__.'/auth.php';

@@ -63,6 +63,11 @@
                     </form>
                 @endif
             </div>
+            <div class="col-auto">
+                @if (!Auth::user()->is_admin && Auth::user()->id !== $item->user_id)
+                <p class="col-auto"><a href="/compose-complaint" class="btn btn-danger">Ziņot par pārkāpumu</a></p>
+                @endif
+            </div>
         </div>
     </div>
 </div>

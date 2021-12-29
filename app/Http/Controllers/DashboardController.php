@@ -84,7 +84,7 @@ class DashboardController extends Controller
             'picture' => ['required', 'image', 'max:10240'], //max image size is 10MB
             'description' => ['required', 'string', 'min:10', 'max:2500'],
             'price' => ['required', 'numeric', 'min:0', 'max:10000'],
-            'state' => ['required', 'integer', 'min:1', 'max:3'], //1 and 3 are state foreign keys 
+            'state' => ['required', 'integer', 'min:1', 'max:3'], //1 - 3 are state foreign keys 
         ]);
 
         $path = $request->file('picture')->store('public/images');

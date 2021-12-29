@@ -36,7 +36,7 @@
         <p class="fs-5 mt-3">Vidējais novērtējums: <span class="filler_text">3/5</span></p>
         {{-- Button to view user reviews if there are any--}}
         <p><a href="#" class="btn btn-primary me-4">Par lietotāju atstātās atsauksmes</a></p>
-        @if (Auth::user()->is_admin)
+        @if (Auth::user()->is_admin && Auth::user() !== $user)
             <form method="post" action="{{route('user.block', $user->id)}}">
                 @csrf
                 <button type="submit" class="btn btn-danger">Bloķēt lietotāju</p>
