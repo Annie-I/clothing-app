@@ -16,10 +16,10 @@ class CreateComplaintsTable extends Migration
         Schema::create('complaints', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
-            $table->string('subject')->default('sludinājums');
+            $table->foreignId('subject_id')->constrained('complaint_subjects');
             $table->string('content');
             $table->timestamps();
-            $table->string('status')->default('jauns');
+            $table->foreignId('status_id')->constrained('complaint_statuses');
             $table->string('status_notes')->nullable();
         });
 

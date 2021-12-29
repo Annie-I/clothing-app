@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\ComplaintStatus;
+use App\Models\ComplaintSubject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,14 +14,24 @@ class Complaint extends Model
 
     protected $fillable = [
         'user_id',
-        'subject',
+        'subject_id',
         'content',
-        'status',
+        'status_id',
         'status_notes',
     ];
 
     public function user() 
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function complaintStatus() 
+    {
+        return $this->hasOne(ComplaintStatus::class, 'id', 'status_id');
+    }
+
+    public function complaintSubject() 
+    {
+        return $this->hasOne(ComplaintSubject::class, 'id', 'subject_id');
     }
 }
