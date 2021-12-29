@@ -35,7 +35,7 @@
                 <p><a href="{{route('item.edit', $item->id)}}" class="btn btn-primary">Labot sludinājumu</a></p>
             </div>
             <div class="col-auto">
-                <form action="{{route('item.delete', $item->id)}}" method="post">
+                <form  method="post" action="{{route('item.delete', $item->id)}}">
                     @csrf
                     <button type="submit" class="btn btn-danger">Dzēst sludinājumu</p>
                 </form>
@@ -55,6 +55,14 @@
                 <p class="col-auto"><a href="/user/{{$user->id}}/compose-message" class="btn btn-primary">Sūtīt ziņu pārdevējam</a></p>
                 <p class="col-auto"><a href="/user/{{$user->id}}" class="btn btn-secondary">Apskatīt pārdevēja profilu</a></p>
             @endif
+            <div class="col-auto">
+                @if (Auth::user()->is_admin && Auth::user()->id !== $item->user_id)
+                    <form method="post" action="{{route('item.delete', $item->id)}}">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Dzēst sludinājumu</p>
+                    </form>
+                @endif
+            </div>
         </div>
     </div>
 </div>

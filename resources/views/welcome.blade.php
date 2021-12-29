@@ -1,16 +1,16 @@
 <x-app-layout>
     <x-slot name="content">
-        @if (session('message'))
-            <div class="alert alert-success">
-                {{ session('message') }}
-            </div>
-        @endif
         <div class="container">
             <div class="card">
                 <div class="card-body">
                     <h5> Visi sludinājumi </h5>
+                    @if (session('message'))
+                        <div class="alert alert-success">
+                            {{ session('message') }}
+                        </div>
+                    @endif
                     <div class="row mt-10">
-                        @if (empty($items))
+                        @if (count($items) === 0)
                             <p>Pagaidām nav pievienots neviens sludinājums.</p>
                         @else
                         {{-- make a card for each item --}}

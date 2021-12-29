@@ -27,12 +27,11 @@ class ItemController extends Controller
     }
 
     public function deleteItem(Item $item) {
-        if ($item->user_id === Auth::id()
-        // TODO: || Auth:user()->isAdmin
-        ) {
+        if ($item->user_id === Auth::id() || Auth::user()->is_admin) 
+        {
             $item->delete();
 
-            return redirect('dashboard')->with('message', 'Sludinājums izdzēsts!');
+            return redirect('/')->with('message', 'Sludinājums izdzēsts!');
         }
 
         return back()->with('error', 'Jūs nevarat izdzēst šo sludinājumu!');
