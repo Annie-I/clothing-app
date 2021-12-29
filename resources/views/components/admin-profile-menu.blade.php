@@ -13,6 +13,6 @@
 <div class="card mt-3">
     <nav class="list-group list-group-flush">
         <a href="/#" class="list-group-item list-group-item-action">Saņemtās sūdzības</a>
-        <a href="/#" class="list-group-item list-group-item-action">Bloķētie lietotāji</a>
+        <a href="/blocked-users" class="list-group-item list-group-item-action">Bloķētie lietotāji</a>
     </nav>
 </div>

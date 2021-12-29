@@ -7,7 +7,7 @@
 <div class="card">
     <div class="card-body">
         <h2 class="card-title fs-3">
-        {{ $user->first_name }} {{ $user->last_name }}
+        {{$user->first_name}} {{$user->last_name}}
         {{-- add / remove from favorite list --}}
             @if ($user->id !== Auth::id() )
                 @if ($isFavorited)
@@ -24,7 +24,7 @@
             @endif
         </h2>
         {{-- User location --}}
-        @if ( $user->location )
+        @if ($user->location )
             <p class="fs-6">Atrašanās vieta: {{ $user->location }}</p>
         @endif
         {{-- Button to view user ads if there are any--}}
@@ -36,6 +36,11 @@
         <p class="fs-5 mt-3">Vidējais novērtējums: <span class="filler_text">3/5</span></p>
         {{-- Button to view user reviews if there are any--}}
         <p><a href="#" class="btn btn-primary me-4">Par lietotāju atstātās atsauksmes</a></p>
-        </div>
+        @if (Auth::user()->is_admin)
+            <form method="post" action="{{route('user.block', $user->id)}}">
+                @csrf
+                <button type="submit" class="btn btn-danger">Bloķēt lietotāju</p>
+            </form>
+        @endif
     </div>
 </div>

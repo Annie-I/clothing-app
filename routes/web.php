@@ -85,4 +85,10 @@ Route::get('/message/{message}/read', [DashboardController::class, 'viewSingleMe
 Route::post('/message/{message}/deleteSent', [DashboardController::class, 'deleteSentMessage'])->middleware(['verified'])->name('sent.message.delete');
 Route::post('/message/{message}/deleteReceived', [DashboardController::class, 'deleteReceivedMessage'])->middleware(['verified'])->name('received.message.delete');
 
+//View blocked user list
+Route::get('/blocked-users', [UserController::class, 'getBlockedUsers'])->middleware(['verified']); //add EnsureIsAdmin middleware
+
+//Block / unblock user
+Route::post('/user/{user}/block-user', [UserController::class, 'blockUser'])->middleware(['verified'])->name('user.block');  //add EnsureIsAdmin middleware
+Route::post('/user/{user}/unblock-user', [UserController::class, 'unblockUser'])->middleware(['verified'])->name('user.unblock');  //add EnsureIsAdmin middleware
 require __DIR__.'/auth.php';

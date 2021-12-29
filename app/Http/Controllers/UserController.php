@@ -40,4 +40,28 @@ class UserController extends Controller
 
         return back()->with('error', 'Jūs nevarat izdzēst šo lietotāja kontu!');
     }
+
+    public function getBlockedUsers()
+    {
+        return view('blocked-users', [
+            'blockedUsers' => User::where('is_blocked', 1)->get(),
+        ]);
+    }
+    
+    public function unblockUser(User $user)
+    {
+        $user->is_blocked = '0';
+        $user->save();
+
+        return redirect('/blocked-users')->with('message', 'Lietotājs veiksmīgi atbloķēts!');
+    }
+
+    public function blockUser(User $user)
+    {
+        $user->is_blocked = '1';
+        $user->save();
+
+        return redirect('/blocked-users')->with('message', 'Lietotāja piekļuve sistēmai bloķēta!');
+    }
+
 }
