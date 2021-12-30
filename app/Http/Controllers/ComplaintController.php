@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Models\Complaint;
+use App\Models\ComplaintStatus;
 use App\Models\ComplaintSubject;
 use App\Models\Item;
 use App\Models\User;
@@ -33,6 +35,36 @@ class ComplaintController extends Controller
         ]);
 
         return redirect('/')->with('message', 'Sūdzība nosūtīta izskatīšanai!');
+    }
+
+    public function getNewComplaints()
+    {
+        return view('complaints', [
+            'complaints' => Complaint::with(['user'])
+                            ->where('status_id', 1)
+                            ->orderBy('created_at', 'DESC')
+                            ->get(),
+        ]);
+    }
+    
+    public function getInProgressComplaints()
+    {
+        return view('complaints', [
+            'complaints' => Complaint::with(['user'])
+                            ->where('status_id', 2)
+                            ->orderBy('created_at', 'DESC')
+                            ->get(),
+        ]);
+    }
+
+    public function getClosedComplaints()
+    {
+        return view('complaints', [
+            'complaints' => Complaint::with(['user'])
+                            ->where('status_id', 3)
+                            ->orderBy('created_at', 'DESC')
+                            ->get(),
+        ]);
     }
     
 }

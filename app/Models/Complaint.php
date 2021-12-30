@@ -25,12 +25,12 @@ class Complaint extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function complaintStatus() 
+    public function status() 
     {
         return $this->hasOne(ComplaintStatus::class, 'id', 'status_id');
     }
 
-    public function complaintSubject() 
+    public function subject() 
     {
         return $this->hasOne(ComplaintSubject::class, 'id', 'subject_id');
     }

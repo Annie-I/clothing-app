@@ -97,4 +97,10 @@ Route::post('/user/{user}/unblock-user', [UserController::class, 'unblockUser'])
 Route::get('/compose-complaint', [ComplaintController::class, 'viewFormToComposeComplaint'])->middleware(['verified']);
 Route::post('/compose-complaint', [ComplaintController::class, 'postComplaint'])->middleware(['verified'])->name('complaint.send');
 
+//Admin complaint lists
+Route::get('/new-complaint-list', [ComplaintController::class, 'getNewComplaints'])->middleware(['verified']); //add EnsureIsAdmin middleware
+Route::get('/in-progress-complaint-list', [ComplaintController::class, 'getInProgressComplaints'])->middleware(['verified']); //add EnsureIsAdmin middleware
+Route::get('/closed-complaint-list', [ComplaintController::class, 'getClosedComplaints'])->middleware(['verified']); //add EnsureIsAdmin middleware
+
+
 require __DIR__.'/auth.php';
