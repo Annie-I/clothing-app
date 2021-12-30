@@ -113,4 +113,9 @@ Route::post('/complaint/{complaint}/edit', [ComplaintController::class, 'postFor
 Route::get('/user/{user}/add-review', [UserController::class, 'viewFormToAddReview'])->middleware(['verified']);
 Route::post('/user/{user}/add-review', [UserController::class, 'postFormToAddReview'])->middleware(['verified'])->name('review.add');
 
+//Edit review
+Route::get('/user/{user}/edit-review', [UserController::class, 'viewFormToEditReview'])->middleware(['verified']);
+Route::post('/user/{user}/edit-review', [UserController::class, 'postFormToEditReview'])->middleware(['verified'])->name('review.edit');
+
+
 require __DIR__.'/auth.php';
