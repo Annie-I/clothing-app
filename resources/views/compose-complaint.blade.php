@@ -12,8 +12,7 @@
                                 </div>
                             @endif
                             <x-auth-validation-errors class="mb-4" :errors="$errors" />
-                            <form method="POST" action="{{route('complaint.send')}}" class="row" enctype="multipart/form-data" --}}
-                            >
+                            <form method="POST" action="{{route('complaint.send')}}" class="row" enctype="multipart/form-data" >
                                 @csrf
                                 <!-- Complaint subject-->
                                 <div>

@@ -13,7 +13,8 @@ use Illuminate\Http\Request;
 
 class ComplaintController extends Controller
 {
-    public function viewFormToComposeComplaint() {
+    public function viewFormToComposeComplaint() 
+    {
         $subjects = ComplaintSubject::all();
 
         return view('compose-complaint', [
@@ -65,6 +66,35 @@ class ComplaintController extends Controller
                             ->orderBy('created_at', 'DESC')
                             ->get(),
         ]);
+    }
+    
+    public function getSingleComplaint(Complaint $complaint) 
+    {
+        return view('complaint-info', [
+            'complaint' => $complaint,
+        ]);
+    }
+
+    public function viewFormToEditComplaint(Complaint $complaint) 
+    {
+        return view('change-complaint-status', [
+            'complaint' => $complaint,
+            'statuses' => ComplaintStatus::all(),
+        ]);
+    }
+
+    public function postFormToEditComplaint(Request $request, Complaint $complaint) 
+    {
+        $request->validate([
+            'status' => ['required', 'integer', 'min:1', 'max:3'], //1 - 3 are status foreign keys 
+            'comment' => ['nullable', 'string', 'max:1000'],
+        ]);
+
+        $complaint->status_id = $request->status;
+        $complaint->status_notes = $request->comment;
+        $complaint->save();
+
+    return redirect('/new-complaint-list')->with('message', 'Sūdzības status veiksmīgi atjaunots!');
     }
     
 }

@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row mt-10">
                 <div class="col-12 col-md-3 mb-3">
-                    <x-admin-profile-menu/>
+                    <x-profile-menu/>
                 </div>
                 <div class="col-12 col-md-9">
                     <div class="card">

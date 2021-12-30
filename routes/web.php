@@ -102,5 +102,12 @@ Route::get('/new-complaint-list', [ComplaintController::class, 'getNewComplaints
 Route::get('/in-progress-complaint-list', [ComplaintController::class, 'getInProgressComplaints'])->middleware(['verified']); //add EnsureIsAdmin middleware
 Route::get('/closed-complaint-list', [ComplaintController::class, 'getClosedComplaints'])->middleware(['verified']); //add EnsureIsAdmin middleware
 
+//View complaint
+Route::get('/complaint/{complaint}/view', [ComplaintController::class, 'getSingleComplaint'])->middleware(['verified']); //add EnsureIsAdmin middleware
+
+//Edit complaint status
+Route::get('/complaint/{complaint}/edit', [ComplaintController::class, 'viewFormToEditComplaint'])->middleware(['verified']); //add EnsureIsAdmin middleware
+Route::post('/complaint/{complaint}/edit', [ComplaintController::class, 'postFormToEditComplaint'])->middleware(['verified']) ->name('complaint.status.update'); //add EnsureIsAdmin middleware
+
 
 require __DIR__.'/auth.php';

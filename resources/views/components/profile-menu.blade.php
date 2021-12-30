@@ -9,3 +9,13 @@
         <a href="/my-active-items" class="list-group-item list-group-item-action {{request()->is('my-active-items') ? 'active' : ''}}">Mani sludinājumi</a>
     </nav>
 </div>
+
+{{-- display admin options only if user is marked as admin --}}
+@if (Auth::user()->is_admin)
+    <div class="card mt-3">
+        <nav class="list-group list-group-flush">
+            <a href="/new-complaint-list" class="list-group-item list-group-item-action">Saņemtās sūdzības</a>
+            <a href="/blocked-users" class="list-group-item list-group-item-action">Bloķētie lietotāji</a>
+        </nav>
+    </div>
+@endif
