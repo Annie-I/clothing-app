@@ -1,4 +1,3 @@
-{{-- Compose a message --}}
 <div class="card">
     <div class="card-body fs-5">
         <h2 class="card-title fs-3">Sūtīt ziņu lietotajam {{$user->first_name}} {{$user->last_name}}</h2>

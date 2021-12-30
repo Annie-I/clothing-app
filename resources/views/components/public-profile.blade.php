@@ -40,7 +40,7 @@
                 <a href="#" class="btn btn-secondary m-2 col-auto">Labot manu atsauksmi</a>
             --}}
             @if (Auth::user() !== $user)
-                <a href="#" class="btn btn-success m-2 col-auto">Atstāt atsauksmi par lietotāju</a>
+                <a href="/user/{{$user->id}}/add-review" class="btn btn-success m-2 col-auto">Atstāt atsauksmi par lietotāju</a>
             @endif
             {{-- Button to view user reviews if there are any--}}
             <a href="#" class="btn btn-primary m-2 col-auto">Par lietotāju atstātās atsauksmes</a>

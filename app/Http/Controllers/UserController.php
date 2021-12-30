@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Auth;
-use App\Models\User;
 use App\Models\Item;
+use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -62,6 +63,33 @@ class UserController extends Controller
         $user->save();
 
         return redirect('/blocked-users')->with('message', 'Lietotāja piekļuve sistēmai bloķēta!');
+    }
+
+    public function viewFormToAddReview(User $user)
+    {
+        return view('add-or-edit-review', [
+            'user' => $user,
+            'hasReviewed' => Review::where('user_id', Auth::id())
+                                    ->where('receiver_id', $user->id)
+                                    ->whereNull('deleted_at')
+                                    ->get(),
+        ]);
+    }
+
+    public function postFormToAddReview(Request $request, User $user)
+    {
+        $request->validate([
+            'rating' => ['required', 'integer', 'min:0', 'max:5'],
+            'review' => ['required', 'string', 'min:5', 'max:250'],
+        ]);
+
+        $review = Auth::user()->reviews()->create([
+            'receiver_id' => $user->id,
+            'rating' => $request->rating,
+            'review' => $request->review,
+        ]);
+
+        return redirect('user/'.$user->id)->with('message', 'Atsauksme veiksmīgi pievienota!');
     }
 
 }

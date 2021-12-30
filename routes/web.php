@@ -109,5 +109,8 @@ Route::get('/complaint/{complaint}/view', [ComplaintController::class, 'getSingl
 Route::get('/complaint/{complaint}/edit', [ComplaintController::class, 'viewFormToEditComplaint'])->middleware(['verified']); //add EnsureIsAdmin middleware
 Route::post('/complaint/{complaint}/edit', [ComplaintController::class, 'postFormToEditComplaint'])->middleware(['verified']) ->name('complaint.status.update'); //add EnsureIsAdmin middleware
 
+//Add review
+Route::get('/user/{user}/add-review', [UserController::class, 'viewFormToAddReview'])->middleware(['verified']);
+Route::post('/user/{user}/add-review', [UserController::class, 'postFormToAddReview'])->middleware(['verified'])->name('review.add');
 
 require __DIR__.'/auth.php';

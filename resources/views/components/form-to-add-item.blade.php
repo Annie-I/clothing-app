@@ -24,7 +24,7 @@
                     <p class="form-label"> Mantas stāvoklis </p>
                     @foreach ($states as $state)
                         <div class="form-check form-check-inline fs-6">
-                            <input class="form-check-input" type="radio" name="state" id="state{{$state->id}}" value="{{$state->id}}">
+                            <input class="form-check-input" type="radio" name="state" id="state{{$state->id}}" value="{{$state->id}}" required>
                             <label class="form-check-label" for="state{{$state->id}}">{{$state->name}}</label>
                         </div>
                     @endforeach
