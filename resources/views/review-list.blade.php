@@ -10,14 +10,16 @@
                                 <p>Sarakstam šobrīd nav pievienots neviens favorīts.</p>
                             @endif
                             @foreach ($reviews as $review)
-                                <div class="col-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{$review->rating}} / 5</h5>
-                                            <p>{{$review->review}}</p>
-                                            <p>No: {{$review->user->first_name}} {{$review->user->last_name}}</p>
-                                        </div>
-                                    </div>
+                                <div>
+                                    <li class="list-group-item">
+                                        <h5 class="fw-bold">Novērtējums: {{$review->rating}} / 5</h5>
+                                        <p>{{$review->review}}</p>
+                                        <p>No: 
+                                            <a href="/user/{{$review->user_id}}" class="fw-bold text-decoration-none">
+                                                {{$review->user->first_name}} {{$review->user->last_name}}
+                                            </a>
+                                        </p>
+                                    </li>
                                 </div>
                             @endforeach
                         </div>
