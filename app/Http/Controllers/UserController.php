@@ -35,6 +35,9 @@ class UserController extends Controller
                                 ->where('receiver_id', $user->id)
                                 ->whereNull('deleted_at')
                                 ->first(),
+            'reviews' => Review::where('receiver_id', $user->id)
+                                ->whereNull('deleted_at')
+                                ->first(),
         ]);
     }
 
@@ -163,6 +166,18 @@ class UserController extends Controller
         }
 
         return back()->with('error', 'Jūs nevarat dzēst šo atsauksmi!');
+    }
+    
+    public function getAllReviewsAboutUser(User $user)
+    {
+        $reviews = Review::with(['user'])
+                        ->where('receiver_id', $user->id)
+                        ->whereNull('deleted_at')
+                        ->get();
+
+        return view('review-list', [
+            'reviews' => $reviews,
+        ]);
     }
     
 }

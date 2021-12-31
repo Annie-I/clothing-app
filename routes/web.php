@@ -120,4 +120,7 @@ Route::post('/user/{user}/edit-review', [UserController::class, 'postFormToEditR
 //Delete review
 Route::post('/user/{user}/delete-review', [UserController::class, 'deleteReview'])->middleware(['verified'])->name('review.delete');
 
+//View reviews left about the user
+Route::get('/user/{user}/all-reviews', [UserController::class, 'getAllReviewsAboutUser'])->middleware(['verified']);
+
 require __DIR__.'/auth.php';

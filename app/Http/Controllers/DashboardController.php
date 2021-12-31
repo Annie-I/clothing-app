@@ -24,6 +24,9 @@ class DashboardController extends Controller
                             ->where('receiver_id', $user->id)
                             ->whereNull('deleted_at')
                             ->get(),
+            'reviews' => Review::where('receiver_id', $user->id)
+                                ->whereNull('deleted_at')
+                                ->first(),
         ]);
     }
 

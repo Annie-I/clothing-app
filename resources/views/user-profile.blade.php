@@ -9,6 +9,7 @@
                         :itemCount="$itemCount" 
                         :hasCommunicated="$hasCommunicated" 
                         :review="$review"
+                        :reviews="$reviews"
                     />
                 </div>
             </div>

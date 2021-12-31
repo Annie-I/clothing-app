@@ -33,7 +33,13 @@
                 <p>Atrašanās vieta nav norādīta.</p>
             @endif
         </div>
-        <p class="fs-5 mt-3">Lietotāja vidējais novērtējums: <span class="filler_text">3/5</span></p>
+        {{-- If there are any reviews left about the user then show avg rating --}}
+        @if ($reviews)
+            <p class="fs-5 mt-3">Lietotāja vidējais novērtējums: <span class="filler_text">3/5</span></p>
+        @else
+            <p class="fs-5 mt-3">Par šo lietotāju pagaidām nav atstāta neviena atsauksme.</p>
+        @endif
+        {{-- If user doesnt have any active items in sale: --}}
         @if (!$itemCount)
             <p>Šim lietotājam nav aktīvu sludinājumu.</p>
         @endif
@@ -47,7 +53,9 @@
                 <a href="/user/{{$user->id}}/edit-review" class="btn btn-success m-2 col-auto">Labot atstāto atsauksmi</a>
             @endif
             {{-- Button to view user reviews if there are any--}}
-            <a href="#" class="btn btn-primary m-2 col-auto">Par lietotāju atstātās atsauksmes</a>
+            @if ($reviews)
+                <a href="/user/{{$user->id}}/all-reviews" class="btn btn-primary m-2 col-auto">Par lietotāju atstātās atsauksmes</a>
+            @endif
             {{-- Button to view user ads if there are any--}}
             @if ($itemCount > 0)
                 <a href="/user/{{$user->id}}/active-items" class="btn btn-primary m-2 col-auto">Apskatīt lietotāja sludinājumus</a>
