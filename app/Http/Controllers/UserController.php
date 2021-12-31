@@ -31,10 +31,10 @@ class UserController extends Controller
             'isFavorited' => $favorites->contains($user),
             'itemCount' => $itemCount,
             'hasCommunicated' => count($sentMessages) + count($receivedMessages),
-            'hasReviewed' => Review::where('user_id', Auth::id())
-                                    ->where('receiver_id', $user->id)
-                                    ->whereNull('deleted_at')
-                                    ->get(),
+            'review' => Review::where('user_id', Auth::id())
+                                ->where('receiver_id', $user->id)
+                                ->whereNull('deleted_at')
+                                ->first(),
         ]);
     }
 
@@ -110,21 +110,28 @@ class UserController extends Controller
 
     public function viewFormToEditReview(User $user)
     {
+        $review = Review::where('user_id', Auth::id())
+                        ->where('receiver_id', $user->id)
+                        ->whereNull('deleted_at')
+                        ->first();
+
         if ($review->user_id !==  Auth::id()) {
             abort(404);
         }
 
         return view('add-or-edit-review', [
             'user' => $user,
-            'review' => Review::where('user_id', Auth::id())
-                                ->where('receiver_id', $user->id)
-                                ->whereNull('deleted_at')
-                                ->first(),
+            'review' => $review,
         ]);
     }
     
     public function postFormToEditReview(Request $request, User $user)
     {
+        $review = Review::where('user_id', Auth::id())
+                ->where('receiver_id', $user->id)
+                ->whereNull('deleted_at')
+                ->first();
+
         if ($review->user_id !==  Auth::id()) {
             abort(404);
         }
@@ -134,15 +141,28 @@ class UserController extends Controller
             'review' => ['required', 'string', 'min:5', 'max:250'],
         ]);
 
-        $review = Review::where('user_id', Auth::id())
-                ->where('receiver_id', $user->id)
-                ->whereNull('deleted_at')
-                ->first();
-
         $review->rating = $request->rating;
         $review->review = $request->review;
         $review->save();
 
-        return redirect('user/'.$review->user_id)->with('message', 'Atsauksme veiksmīgi atjaunota!');
+        return redirect('user/'.$review->receiver_id)->with('message', 'Atsauksme veiksmīgi atjaunota!');
     }
+
+    public function deleteReview(User $user) 
+    {
+        $review = Review::where('user_id', Auth::id())
+                        ->where('receiver_id', $user->id)
+                        ->whereNull('deleted_at')
+                        ->first();
+
+        if ($review->user_id === Auth::id() || Auth::user()->is_admin) 
+        {
+            $review->delete();
+
+            return redirect('user/'.$review->receiver_id)->with('message', 'Atsauksme dzēsta!');
+        }
+
+        return back()->with('error', 'Jūs nevarat dzēst šo atsauksmi!');
+    }
+    
 }

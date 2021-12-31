@@ -6,6 +6,7 @@ use Auth;
 use App\Models\Item;
 use App\Models\ItemState;
 use App\Models\Message;
+use App\Models\Review;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,6 +20,10 @@ class DashboardController extends Controller
         return view($view, [
             'user' => $user,
             'itemCount' => $itemCount,
+            'review' => Review::where('user_id', Auth::id())
+                            ->where('receiver_id', $user->id)
+                            ->whereNull('deleted_at')
+                            ->get(),
         ]);
     }
 

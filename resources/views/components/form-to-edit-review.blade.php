@@ -16,18 +16,21 @@
                     <label class="form-check-label" for="rating{{$n}}">{{$n}}</label>
                 </div>
             @endfor
-
             <!-- Review -->
             <div class="m-2">
                 <label for="review" class="form-label">Atsauksme</label>
                 <textarea id="review" name="review" class="form-control" required>{{$review->review}}</textarea>
             </div>
-
-            <!-- Buttons -->
+            <!-- Buttons --> 
             <div class="row mt-3">
                 <p class="col-auto ml-2"><button type="submit" class="btn btn-success">Labot atsauksmi</button></p>
-                <p class="col-auto"><a href="/user/{{$user->id}}" class="btn btn-danger">Atcelt</a></p>
+                <p class="col-auto"><a href="/user/{{$user->id}}" class="btn btn-secondary">Atcelt</a></p>
             </div>
+        </form>
+        <!-- Buttons -->
+        <form class="ml-2" method="post" action="{{route('review.delete', $user)}}">
+            @csrf
+            <button type="submit" class="btn btn-danger">Dzēst atsauksmi</p>
         </form>
     </div>
 </div>

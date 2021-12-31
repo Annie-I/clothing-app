@@ -8,7 +8,7 @@
                         :isFavorited="$isFavorited ?? ''" 
                         :itemCount="$itemCount" 
                         :hasCommunicated="$hasCommunicated" 
-                        :hasReviewed="$hasReviewed"
+                        :review="$review"
                     />
                 </div>
             </div>

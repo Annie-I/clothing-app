@@ -41,9 +41,9 @@
             {{-- Button to add a user review if there has been comunication between them.
                 If user has left a review already, instead there is a button to edit it
             --}}
-            @if (Auth::id() !== $user->id && $hasCommunicated && !$hasReviewed)
+            @if (Auth::id() !== $user->id && $hasCommunicated && !$review)
                 <a href="/user/{{$user->id}}/add-review" class="btn btn-success m-2 col-auto">Atstāt atsauksmi par lietotāju</a>
-            @elseif ($hasReviewed && Auth::id() !== $user->id)
+            @elseif ($review && Auth::id() !== $user->id)
                 <a href="/user/{{$user->id}}/edit-review" class="btn btn-success m-2 col-auto">Labot atstāto atsauksmi</a>
             @endif
             {{-- Button to view user reviews if there are any--}}

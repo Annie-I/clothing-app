@@ -117,5 +117,7 @@ Route::post('/user/{user}/add-review', [UserController::class, 'postFormToAddRev
 Route::get('/user/{user}/edit-review', [UserController::class, 'viewFormToEditReview'])->middleware(['verified']);
 Route::post('/user/{user}/edit-review', [UserController::class, 'postFormToEditReview'])->middleware(['verified'])->name('review.edit');
 
+//Delete review
+Route::post('/user/{user}/delete-review', [UserController::class, 'deleteReview'])->middleware(['verified'])->name('review.delete');
 
 require __DIR__.'/auth.php';
