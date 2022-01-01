@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'failed' => 'Netika atrast lietotājs ar šādu epastu un / vai paroli.',
+    'failed' => 'Netika atrast lietotājs ar šādu e-pastu un / vai paroli.',
     'password' => 'Ievadītā parole ir nepareiza.',
-    'throttle' => 'Pārāk daudz mēģinājumu pēc kārtas. Lūdzu, uzgaidiet un pēc brīža mēģiniet vēlreiz.',
+    'throttle' => 'Pārāk daudz atkārtotu mēģinājumu. Lūdzu, uzgaidiet un pēc brīža mēģiniet vēlreiz.',
 
 ];
