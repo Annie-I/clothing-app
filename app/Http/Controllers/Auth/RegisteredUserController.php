@@ -36,7 +36,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'firstName' => ['required', 'string', 'max:150'],
             'lastName' => ['required', 'string', 'max:150'],
-            'birthDate' => ['required', 'date'],
+            'birthDate' => ['required', 'date', 'before:tomorrow', 'after:1900-01-01'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::min(8)
                                                     ->mixedCase()

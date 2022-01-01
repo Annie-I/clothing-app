@@ -16,13 +16,13 @@ return [
     'accepted' => 'The :attribute must be accepted.',
     'accepted_if' => 'The :attribute must be accepted when :other is :value.',
     'active_url' => 'The :attribute is not a valid URL.',
-    'after' => 'The :attribute must be a date after :date.',
+    'after' => ':attribute nedrīkst būt senāks par :date.',
     'after_or_equal' => 'The :attribute must be a date after or equal to :date.',
     'alpha' => 'The :attribute must only contain letters.',
     'alpha_dash' => 'The :attribute must only contain letters, numbers, dashes and underscores.',
     'alpha_num' => 'The :attribute must only contain letters and numbers.',
     'array' => 'The :attribute must be an array.',
-    'before' => 'The :attribute must be a date before :date.',
+    'before' => ':attribute nedrīkst būt nākotnē.',
     'before_or_equal' => 'The :attribute must be a date before or equal to :date.',
     'between' => [
         'numeric' => 'The :attribute must be between :min and :max.',
@@ -31,7 +31,7 @@ return [
         'array' => 'The :attribute must have between :min and :max items.',
     ],
     'boolean' => 'The :attribute field must be true or false.',
-    'confirmed' => ':attribute un :attribute atkārtoti nesakrīt.',
+    'confirmed' => 'Laukos ":attribute" un ":attribute atkārtoti" ierakstītais nesakrīt.',
     'current_password' => 'The password is incorrect.',
     'date' => 'The :attribute is not a valid date.',
     'date_equals' => 'The :attribute must be a date equal to :date.',
@@ -81,7 +81,7 @@ return [
     'max' => [
         'numeric' => 'The :attribute must not be greater than :max.',
         'file' => 'The :attribute must not be greater than :max kilobytes.',
-        'string' => 'The :attribute must not be greater than :max characters.',
+        'string' => 'Lauka ":attribute" saturs nedrīkst pārsniegt :max simbolu garumu.',
         'array' => 'The :attribute must not have more than :max items.',
     ],
     'mimes' => 'The :attribute must be a file of type: :values.',
@@ -89,7 +89,7 @@ return [
     'min' => [
         'numeric' => 'The :attribute must be at least :min.',
         'file' => 'The :attribute must be at least :min kilobytes.',
-        'string' => 'Laukā ":attribute" ierakstītajam jāsatur vismaz :min simbolus.',
+        'string' => 'Lauka ":attribute" saturam jāsatur vismaz :min simbolu garam.',
         'array' => 'The :attribute must have at least :min items.',
     ],
     'multiple_of' => 'The :attribute must be a multiple of :value.',
@@ -120,7 +120,7 @@ return [
     'starts_with' => 'The :attribute must start with one of the following: :values.',
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid timezone.',
-    'unique' => ':attribute jau tiek izmantots.',
+    'unique' => 'Ievadītais ":attribute" jau tiek izmantots.',
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
@@ -155,7 +155,10 @@ return [
 
     'attributes' => [
         'password' => 'Parole',
-        'email' => 'E-pasts'
+        'email' => 'E-pasts',
+        'firstName' => 'Vārds',
+        'lastName' => 'Uzvārds',
+        'birthDate' => 'Dzimšanas datums',
     ],
 
 ];
