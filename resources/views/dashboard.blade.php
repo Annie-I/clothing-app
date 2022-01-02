@@ -8,10 +8,10 @@
                 <div class="col-12 col-md-9">
                     <x-public-profile 
                         :user="$user" 
-                        :isFavorited="$isFavorited ?? ''" 
-                        :itemCount="$itemCount" 
-                        :review="$review"
+                        :isFavorited="$isFavorited ?? ''"
+                        :itemCount="$itemCount"
                         :reviews="$reviews"
+                        :allRatingSum="$allRatingSum"
                     />
                 </div>
             </div>

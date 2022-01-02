@@ -4,6 +4,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
+                        <p class="col-auto"><a href="/user/{{$user->id}}" class="text-decoration-none text-secondary">< Atpakaļ uz lietotāja profilu</a></p>
                         <p class="fs-3 m-2">Par lietotāju x y atstātās atsauksmes</p>
                         <div class="row">
                             @if (!$reviews)

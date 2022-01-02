@@ -34,8 +34,9 @@
             @endif
         </div>
         {{-- If there are any reviews left about the user then show avg rating --}}
-        @if ($reviews)
-            <p class="fs-5 mt-3">Lietotāja vidējais novērtējums: <span class="filler_text">3/5</span></p>
+        
+        @if (count($reviews))
+            <p class="fs-5 mt-3">Lietotāja vidējais novērtējums: {{$allRatingSum / count($reviews)}} / 5</p>
         @else
             <p class="fs-5 mt-3">Par šo lietotāju pagaidām nav atstāta neviena atsauksme.</p>
         @endif
@@ -49,11 +50,11 @@
             --}}
             @if (Auth::id() !== $user->id && $hasCommunicated && !$review)
                 <a href="/user/{{$user->id}}/add-review" class="btn btn-success m-2 col-auto">Atstāt atsauksmi par lietotāju</a>
-            @elseif ($review && Auth::id() !== $user->id)
+            @elseif (Auth::id() !== $user->id && $review)
                 <a href="/user/{{$user->id}}/edit-review" class="btn btn-success m-2 col-auto">Labot atstāto atsauksmi</a>
             @endif
             {{-- Button to view user reviews if there are any--}}
-            @if ($reviews)
+            @if (count($reviews))
                 <a href="/user/{{$user->id}}/all-reviews" class="btn btn-primary m-2 col-auto">Par lietotāju atstātās atsauksmes</a>
             @endif
             {{-- Button to view user ads if there are any--}}

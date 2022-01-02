@@ -20,19 +20,29 @@ class DashboardController extends Controller
         return view($view, [
             'user' => $user,
             'itemCount' => $itemCount,
-            'review' => Review::where('user_id', Auth::id())
-                            ->where('receiver_id', $user->id)
-                            ->whereNull('deleted_at')
-                            ->get(),
-            'reviews' => Review::where('receiver_id', $user->id)
-                                ->whereNull('deleted_at')
-                                ->first(),
         ]);
     }
 
     public function getUserProfile()
     {
-        return $this->getViewWithUserInfo('dashboard', Auth::user());
+        $user = Auth::user();
+        $itemCount = $user->items->count();
+
+        $reviews = Review::where('receiver_id', $user->id)
+                        ->whereNull('deleted_at')
+                        ->get();
+
+        $allRatingSum = 0;
+        foreach ($reviews as $review) {
+            $allRatingSum = $allRatingSum + $review->rating;
+        }
+
+        return view('dashboard', [
+            'user' => $user,
+            'itemCount' => $itemCount,
+            'reviews' => $reviews,
+            'allRatingSum' => $allRatingSum,
+        ]);
     }
 
     public function getUserData()

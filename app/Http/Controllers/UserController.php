@@ -14,6 +14,10 @@ class UserController extends Controller
     public function getPublicProfile(User $user)
     {
         
+        if ($user->id === Auth::id()) {
+            return redirect('/dashboard');
+        }
+
         $favorites = Auth::user()->favorites;
 
         $itemCount = $user->items->count();
@@ -26,6 +30,15 @@ class UserController extends Controller
             ->where('receiver_id', Auth::id())
             ->get();
 
+        $reviews = Review::where('receiver_id', $user->id)
+                        ->whereNull('deleted_at')
+                        ->get();
+
+        $allRatingSum = 0;
+        foreach ($reviews as $review) {
+            $allRatingSum = $allRatingSum + $review->rating;
+        }
+
         return view('user-profile', [
             'user' => $user,
             'isFavorited' => $favorites->contains($user),
@@ -35,9 +48,8 @@ class UserController extends Controller
                                 ->where('receiver_id', $user->id)
                                 ->whereNull('deleted_at')
                                 ->first(),
-            'reviews' => Review::where('receiver_id', $user->id)
-                                ->whereNull('deleted_at')
-                                ->first(),
+            'reviews' => $reviews,
+            'allRatingSum' => $allRatingSum,
         ]);
     }
 
@@ -177,6 +189,7 @@ class UserController extends Controller
 
         return view('review-list', [
             'reviews' => $reviews,
+            'user' => $user,
         ]);
     }
     
