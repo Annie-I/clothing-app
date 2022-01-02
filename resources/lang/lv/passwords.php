@@ -13,9 +13,9 @@ return [
     |
     */
 
-    'reset' => 'Your password has been reset!',
-    'sent' => 'We have emailed your password reset link!',
-    'throttled' => 'Please wait before retrying.',
+    'reset' => 'Jūsu parole ir nomainīta!',
+    'sent' => 'Paroles atiestatīšanas saite ir nosūtīta!',
+    'throttled' => 'Lūdzu, uzgaidiet pirms atkārtota mēģinājuma.',
     'token' => 'This password reset token is invalid.',
     'user' => "Netika atrasts lietotājs ar norādīto e-pasta adresi.",
 
