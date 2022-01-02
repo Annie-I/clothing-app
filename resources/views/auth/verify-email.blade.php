@@ -11,6 +11,8 @@
                             Ja pēc dažām minūtēm aizvien neesat saņēmis ziņu, pieprasiet to nosūtīt atkārtoti.
                         </p>
 
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
                         @if (session('status') == 'verification-link-sent')
                             <p class="text-secondary fs-6">Uz reģistrācijā norādīto e-pasta adresi ir nosūtīta jauna ziņa ar konta aktivizēšanas instrukcijām.</p>
                         @endif

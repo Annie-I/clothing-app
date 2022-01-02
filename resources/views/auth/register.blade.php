@@ -1,74 +1,52 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+<x-app-layout>
+    <x-slot name="content">
+        <div class="container">
+            <div class="card">
+                <div class="container mt-3">
+                    <h2 class="card-title fs-3 m-2">Reģistrācija</h2>
+                    <div class="card-body fs-5">
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                        <form method="POST" action="{{ route('register') }}" novalidate>
+                            @csrf
+                            <!-- First Name -->
+                            <div>
+                                <label for="firstName" class="form-label">Vārds</label>
+                                <input id="firstName" class="form-control" type="text" name="firstName" required autofocus/>
+                            </div>
+                            <!-- Last Name -->
+                            <div>
+                                <label for="lastName" class="form-label">Uzvārds</label>
+                                <input id="lastName" class="form-control" type="text" name="lastName" required/>
+                            </div>
+                            <!-- Birth Date -->
+                            <div>
+                                <label for="birthDate" class="form-label">Dzimšanas datums</label>
+                                <input id="birthDate" class="form-control" type="date" name="birthDate" required />
+                            </div>
+                            <!-- Email Address -->
+                            <div>
+                                <label for="email" class="form-label">E-pasts</label>
+                                <input id="email" class="form-control" type="email" name="email" required />
+                            </div>
+                            <!-- Password -->
+                            <div>
+                                <label for="password" class="form-label">Parole</label>
+                                <input id="password" class="form-control"type="password" name="password" required autocomplete="new-password" />
+                            </div>
+                            <!-- Confirm Password -->
+                            <div>
+                                <label for="password_confirmation" class="form-label">Parole atkārtoti</label>
+                                <input id="password_confirmation" class="form-control" type="password" name="password_confirmation" required />
+                            </div>
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-
-            <!-- First Name -->
-            <div>
-                <x-label for="firstName" :value="__('Vārds')" />
-
-                <x-input id="firstName" class="block mt-1 w-full" type="text" name="firstName" :value="old('firstName')" required autofocus />
+                            <div class="row mt-4">
+                                <p class="col-auto"><button type="submit" class="btn btn-success">Iesniegt</button></p>
+                                <p class="col-auto"><a href="/" class="btn btn-secondary">Atcelt</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            
-            <!-- Last Name -->
-            <div class="mt-4">
-                <x-label for="lastName" :value="__('Uzvārds')" />
-
-                <x-input id="lastName" class="block mt-1 w-full" type="text" name="lastName" :value="old('lastName')" required />
-            </div>
-
-            <!-- Birth Date -->
-            <div class="mt-4">
-                <x-label for="birthDate" :value="__('Dzimšanas datums')" />
-
-                <x-input id="birthDate" class="block mt-1 w-full" type="date" name="birthDate" :value="old('birthDate')" required />
-            </div>
-
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('E-pasts')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Parole')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Parole atkārtoti')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ml-4">
-                    {{ __('Register') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+        </div>
+    </x-slot>
+</x-app-layout>
