@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Models\Category;
 use App\Models\Item;
 use App\Models\ItemState;
 use App\Models\User;
@@ -11,8 +12,17 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
-    public function getAllItems() {
+    public function getAllItems(Request $request) {
+        // dd($request->query('category'));
         // return item view
+
+        if ($request->query('category')) {
+            return view('welcome', [
+                'items' => Item::with(['state', 'user'])->whereNull('sold_at')->where('category_id', $request->query('category'))->get(),
+                'category' => Category::find($request->query('category'))
+            ]);
+        }
+        
         return view('welcome', [
             'items' => Item::with(['state', 'user'])->whereNull('sold_at')->get(),
         ]);

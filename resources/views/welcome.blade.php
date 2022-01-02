@@ -3,7 +3,11 @@
         <div class="container">
             <div class="card">
                 <div class="card-body">
-                    <h5> Visi sludinājumi </h5>
+                    @if (isset($category)) 
+                        <h5 class="text-capitalize">{{ $category->name }}</h5>
+                    @else
+                        <h5> Visi sludinājumi </h5>
+                    @endif
                     @if (session('message'))
                         <div class="alert alert-success">
                             {{ session('message') }}
