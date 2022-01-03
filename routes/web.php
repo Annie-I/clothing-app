@@ -54,11 +54,10 @@ Route::post('/user/{user}/delete', [UserController::class, 'deleteUser'])->middl
 
 //Add item to sale
 Route::get('/add-item', [DashboardController::class, 'viewFormToAddItemToSale'])->middleware(['verified']);
-
 Route::post('/add-item', [DashboardController::class, 'addItemToSale'])->middleware(['verified'])->name('item.add');
 
 //View single item
-Route::get('/item/{item}', [ItemController::class, 'getSingleItem'])->middleware(['verified']);
+Route::get('/item/{item}', [ItemController::class, 'getSingleItem']);
 
 //Delete single item
 Route::post('/item/{item}/delete', [ItemController::class, 'deleteItem'])->middleware(['verified'])->name('item.delete');

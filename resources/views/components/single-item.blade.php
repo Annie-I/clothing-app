@@ -41,47 +41,51 @@
         </div>
         {{-- Buttons --}}
         <div class="row">
-            {{-- If item owner is viewing this: --}}
-            @if (Auth::user()->id === $item->user_id)
-            <div class="col-auto">
-                <p><a href="{{route('item.edit', $item->id)}}" class="btn btn-primary">Labot sludinājumu</a></p>
-            </div>
-            <div class="col-auto">
-                <form  method="post" action="{{route('item.delete', $item->id)}}">
-                    @csrf
-                    <button type="submit" class="btn btn-danger">Dzēst sludinājumu</p>
-                </form>
-            </div>
-            <div class="col-auto">
-                <form method="POST" action="{{route('item.sale.status', $item->id)}}"
-                    >
-                    @csrf
-                    @if ($item->sold_at)
-                        <button type="submit" class="btn btn-secondary">Ievietot pārdošanā</p>
-                    @else
-                        <button type="submit" class="btn btn-secondary">Atzīmēt kā pārdotu</p>
-                    @endif
-                </form>
-            </div>
-            {{-- If any other user who does not own this item is viewing this: --}}
-            @else
-                <p class="col-auto"><a href="/user/{{$user->id}}/compose-message" class="btn btn-primary">Sūtīt ziņu pārdevējam</a></p>
-            @endif
-            {{-- If other user who is an admin is viewing this: --}}
-            <div class="col-auto">
-                @if (Auth::user()->is_admin && Auth::user()->id !== $item->user_id)
-                    <form method="post" action="{{route('item.delete', $item->id)}}">
+            @if (Auth::user())
+                {{-- If item owner is viewing this: --}}
+                @if (Auth::user()->id === $item->user_id)
+                <div class="col-auto">
+                    <p><a href="{{route('item.edit', $item->id)}}" class="btn btn-primary">Labot sludinājumu</a></p>
+                </div>
+                <div class="col-auto">
+                    <form  method="post" action="{{route('item.delete', $item->id)}}">
                         @csrf
                         <button type="submit" class="btn btn-danger">Dzēst sludinājumu</p>
                     </form>
+                </div>
+                <div class="col-auto">
+                    <form method="POST" action="{{route('item.sale.status', $item->id)}}"
+                        >
+                        @csrf
+                        @if ($item->sold_at)
+                            <button type="submit" class="btn btn-secondary">Ievietot pārdošanā</p>
+                        @else
+                            <button type="submit" class="btn btn-secondary">Atzīmēt kā pārdotu</p>
+                        @endif
+                    </form>
+                </div>
+                {{-- If any other user who does not own this item is viewing this: --}}
+                @else
+                    <p class="col-auto"><a href="/user/{{$user->id}}/compose-message" class="btn btn-primary">Sūtīt ziņu pārdevējam</a></p>
                 @endif
-            </div>
-            {{-- If other user who is not an admin is viewing this: --}}
-            <div class="col-auto">
-                @if (!Auth::user()->is_admin && Auth::user()->id !== $item->user_id)
-                <p class="col-auto"><a href="/compose-complaint" class="btn btn-danger">Ziņot par pārkāpumu</a></p>
-                @endif
-            </div>
+                {{-- If other user who is an admin is viewing this: --}}
+                <div class="col-auto">
+                    @if (Auth::user()->is_admin && Auth::user()->id !== $item->user_id)
+                        <form method="post" action="{{route('item.delete', $item->id)}}">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Dzēst sludinājumu</p>
+                        </form>
+                    @endif
+                </div>
+                {{-- If other user who is not an admin is viewing this: --}}
+                <div class="col-auto">
+                    @if (!Auth::user()->is_admin && Auth::user()->id !== $item->user_id)
+                    <p class="col-auto"><a href="/compose-complaint" class="btn btn-danger">Ziņot par pārkāpumu</a></p>
+                    @endif
+                </div>
+            @else
+                <p>Lai nosūtītu ziņu mantas īpašniekam, nepieciešams <a href="/login" class="text-body fw-bold">pieteikties sistēmā</a>.</p>
+            @endif
         </div>
     </div>
 </div>
