@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
+use Auth, Hash;
 use App\Models\Item;
 use App\Models\Message;
 use App\Models\Review;
 use App\Models\User;
+use Illuminate\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
 
 class UserController extends Controller
 {
@@ -191,6 +193,44 @@ class UserController extends Controller
             'reviews' => $reviews,
             'user' => $user,
         ]);
+    }
+
+    
+    public function viewFormToChangePassword() 
+    {
+        $user = Auth::user();
+
+        return view('change-password', [
+            'user' => $user,
+        ]);
+    }
+    
+    public function postFormToChangePassword(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'password' => ['required'],
+            'new_password' => ['required', 'string', 'confirmed', Rules\Password::min(8)
+                                                                                ->mixedCase()
+                                                                                ->numbers()
+                                                                                ->symbols()],
+            'new_password_confirmation' => ['required'],
+        ]);
+
+        if (Hash::check($request->password, $user->password)){
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+    
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+    
+            return redirect('/')->with('message', 'Jūsu parole ir veiksmīgi nomainīta! Lūdzu, piesakieties sistēmā.');
+        }
+
+        return back()->with('error', 'Jūsu pašreizējā parole ir ievadīta nepareizi!');
+
     }
     
 }

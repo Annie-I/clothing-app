@@ -122,4 +122,9 @@ Route::post('/user/{user}/delete-review', [UserController::class, 'deleteReview'
 //View reviews left about the user
 Route::get('/user/{user}/all-reviews', [UserController::class, 'getAllReviewsAboutUser'])->middleware(['verified']);
 
+//Change user password
+Route::get('/change-password', [UserController::class, 'viewFormToChangePassword'])->middleware(['verified']);
+Route::post('/change-password', [UserController::class, 'postFormToChangePassword'])->middleware(['verified'])->name('password.change');
+
+
 require __DIR__.'/auth.php';

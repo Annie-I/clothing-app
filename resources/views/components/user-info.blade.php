@@ -24,7 +24,7 @@
             <div class="container mb-2">
                 <div class="row">
                     <p class="col-auto"><a href="edit-user-information" class="btn btn-primary">Labot datus</a></p>
-                    <p class="col-auto"><a href="#" class="btn btn-secondary">Mainīt paroli</a></p>
+                    <p class="col-auto"><a href="/change-password" class="btn btn-secondary">Mainīt paroli</a></p>
                     <form action="{{route('user.delete', $user->id)}}" method="post" class="col-auto">
                         @csrf
                         <button type="submit" class="btn btn-danger mb-2">Dzēst kontu</a>
