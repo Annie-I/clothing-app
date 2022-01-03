@@ -9,49 +9,49 @@
             </a>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link link-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+            <a class="nav-link link-dark" href="#" role="button" data-bs-toggle="dropdown">
                 Sievietēm
             </a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="?category=1">Aksesuāri</a></li>
-                <li><a class="dropdown-item" href="?category=2">Apavi</a></li>
-                <li><a class="dropdown-item" href="?category=3">Apģērbs</a></li>
+                <li><a class="dropdown-item" href="/?category=1">Aksesuāri</a></li>
+                <li><a class="dropdown-item" href="/?category=2">Apavi</a></li>
+                <li><a class="dropdown-item" href="/?category=3">Apģērbs</a></li>
             </ul>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link link-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+            <a class="nav-link link-dark" href="#" role="button" data-bs-toggle="dropdown">
                 Vīriešiem
             </a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="?category=4">Aksesuāri</a></li>
-                <li><a class="dropdown-item" href="?category=5">Apavi</a></li>
-                <li><a class="dropdown-item" href="?category=6">Apģērbs</a></li>
+                <li><a class="dropdown-item" href="/?category=4">Aksesuāri</a></li>
+                <li><a class="dropdown-item" href="/?category=5">Apavi</a></li>
+                <li><a class="dropdown-item" href="/?category=6">Apģērbs</a></li>
             </ul>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link link-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+            <a class="nav-link link-dark" href="#" role="button" data-bs-toggle="dropdown">
                 Bērniem
             </a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="?category=7">Aksesuāri</a></li>
-                <li><a class="dropdown-item" href="?category=8">Apavi</a></li>
-                <li><a class="dropdown-item" href="?category=9">Apģērbs</a></li>
-                <li><a class="dropdown-item" href="?category=10">Rotaļlietas</a></li>
-                <li><a class="dropdown-item" href="?category=11">Skolai</a></li>
+                <li><a class="dropdown-item" href="/?category=7">Aksesuāri</a></li>
+                <li><a class="dropdown-item" href="/?category=8">Apavi</a></li>
+                <li><a class="dropdown-item" href="/?category=9">Apģērbs</a></li>
+                <li><a class="dropdown-item" href="/?category=10">Rotaļlietas</a></li>
+                <li><a class="dropdown-item" href="/?category=11">Skolai</a></li>
             </ul>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link link-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+            <a class="nav-link link-dark" href="#" role="button" data-bs-toggle="dropdown">
                 Mājai un dārzam
             </a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="?category=12">Dekori</a></li>
-                <li><a class="dropdown-item" href="?category=13">Grāmatas</a></li>
-                <li><a class="dropdown-item" href="?category=14">Interjera priekšmeti</a></li>
-                <li><a class="dropdown-item" href="?category=15">Mēbeles</a></li>
-                <li><a class="dropdown-item" href="?category=16">Remontam</a></li>
-                <li><a class="dropdown-item" href="?category=17">Tehnika</a></li>
-                <li><a class="dropdown-item" href="?category=18">Instrumenti</a></li>
+                <li><a class="dropdown-item" href="/?category=12">Dekori</a></li>
+                <li><a class="dropdown-item" href="/?category=13">Grāmatas</a></li>
+                <li><a class="dropdown-item" href="/?category=14">Interjera priekšmeti</a></li>
+                <li><a class="dropdown-item" href="/?category=15">Mēbeles</a></li>
+                <li><a class="dropdown-item" href="/?category=16">Remontam</a></li>
+                <li><a class="dropdown-item" href="/?category=17">Tehnika</a></li>
+                <li><a class="dropdown-item" href="/?category=18">Instrumenti</a></li>
             </ul>
         </li>
     </ul>
