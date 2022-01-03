@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\Models\Category;
 use App\Models\Item;
 use App\Models\ItemState;
 use App\Models\Message;
@@ -98,11 +99,12 @@ class DashboardController extends Controller
     public function addItemToSale(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:250'],
             'picture' => ['required', 'image', 'max:10240'], //max image size is 10MB
-            'description' => ['required', 'string', 'min:10', 'max:2500'],
-            'price' => ['required', 'numeric', 'min:0', 'max:10000'],
+            'name' => ['required', 'string', 'max:150'],
+            'category' => ['required', 'integer', 'min:1', 'max:19'], //1 - 19 are category foreign keys 
             'state' => ['required', 'integer', 'min:1', 'max:3'], //1 - 3 are state foreign keys 
+            'price' => ['required', 'numeric', 'min:0', 'max:10000'],
+            'description' => ['required', 'string', 'min:10', 'max:2500'],
         ]);
 
         $path = $request->file('picture')->store('public/images');
@@ -110,11 +112,12 @@ class DashboardController extends Controller
         $price = (number_format((float)$request->price, 2, '.', ''))*100;
 
         $item = Auth::user()->items()->create([
-            'name' => $request->name,
             'image_path' => $path,
-            'description' => $request->description,
-            'price' => $price ,
+            'name' => $request->name,
+            'category_id' => $request->category,
             'state_id' => $request->state,
+            'price' => $price ,
+            'description' => $request->description,
         ]);
 
         return redirect('item/'.$item->id)->with('message', 'Sludinājums pievienots veiksmīgi!');
@@ -126,6 +129,7 @@ class DashboardController extends Controller
 
         return view('add-item-for-sale', [
             'states' => $states,
+            'categories' => Category::all(),
         ]);
     }
     
@@ -183,7 +187,7 @@ class DashboardController extends Controller
     public function viewSingleMessage(Message $message)
     {
         if ($message->sender_id !==  Auth::id() && $message->receiver_id !==  Auth::id()) {
-            abort(404);
+            abort(403);
         }
 
         if (!$message->read_at && $message->receiver_id === Auth::id()) {

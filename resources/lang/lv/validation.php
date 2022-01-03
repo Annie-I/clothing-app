@@ -79,8 +79,8 @@ return [
         'array' => 'The :attribute must not have more than :value items.',
     ],
     'max' => [
-        'numeric' => 'The :attribute must not be greater than :max.',
-        'file' => 'The :attribute must not be greater than :max kilobytes.',
+        'numeric' => 'Lauka ":attribute" vērtība nedrīkst pārsniegt :max.',
+        'file' => 'Laukā ":attribute" izvēlētais fails nedrīkst pārsniegt :max kilobaitus.',
         'string' => 'Lauka ":attribute" saturs nedrīkst pārsniegt :max simbolu garumu.',
         'array' => 'The :attribute must not have more than :max items.',
     ],
@@ -159,6 +159,12 @@ return [
         'firstName' => 'Vārds',
         'lastName' => 'Uzvārds',
         'birthDate' => 'Dzimšanas datums',
+        'name' => 'Nosaukums',
+        'picture' => 'Pievienot bildi',
+        'category' => 'Kategorija',
+        'state' => 'Mantas stāvoklis',
+        'price' => 'Cena',
+        'description' => 'Apraksts',
     ],
 
 ];

@@ -5,18 +5,31 @@
 
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('item.add') }}" class="row" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('item.add') }}" class="row" enctype="multipart/form-data" novalidate>
             @csrf
                 <!-- Item Picture -->
                 <div>
                     <label for="picture" class="form-label">Pievienot bildi</label>
-                    <input id="picture" type="file" class="form-control" name="picture" required/>
+                    <input id="picture" type="file" class="form-control" name="picture"/>
                 </div>
 
                 <!-- Item Name -->
                 <div>
                     <label for="name" class="form-label">Nosaukums</label>
-                    <input id="name" class="form-control" type="text" name="name" required/>
+                    <input id="name" class="form-control" type="text" name="name"/>
+                </div>
+
+                <!-- Item category-->
+                <div>
+                    <label for="category" class="form-label">Kategorija</label>
+                    <select id="category" name="category" class="form-select mb-3">
+                        <option value="0" disabled selected>Izvēlēties</option>
+                        @foreach ($categories as $category)
+                            <option value="{{$category->id}}">
+                                {{$category->name}}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <!-- Item State -->
@@ -24,7 +37,7 @@
                     <p class="form-label"> Mantas stāvoklis </p>
                     @foreach ($states as $state)
                         <div class="form-check form-check-inline fs-6">
-                            <input class="form-check-input" type="radio" name="state" id="state{{$state->id}}" value="{{$state->id}}" required>
+                            <input class="form-check-input" type="radio" name="state" id="state{{$state->id}}" value="{{$state->id}}">
                             <label class="form-check-label" for="state{{$state->id}}">{{$state->name}}</label>
                         </div>
                     @endforeach
@@ -49,7 +62,7 @@
             <div class="container">
                 <div class="row mt-3">
                     <p class="col-auto"><button type="submit" class="btn btn-success">Pievienot pārdošanai</button></p>
-                    <p class="col-auto"><a href="/dashboard" class="btn btn-danger">Atcelt</a></p>
+                    <p class="col-auto"><a href="/dashboard" class="btn btn-secondary">Atcelt</a></p>
                 </div>
             </div>
         </form>

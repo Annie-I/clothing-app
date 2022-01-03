@@ -131,7 +131,7 @@ class UserController extends Controller
                         ->first();
 
         if ($review->user_id !==  Auth::id()) {
-            abort(404);
+            abort(403);
         }
 
         return view('add-or-edit-review', [
@@ -148,7 +148,7 @@ class UserController extends Controller
                 ->first();
 
         if ($review->user_id !==  Auth::id()) {
-            abort(404);
+            abort(403);
         }
         
         $request->validate([

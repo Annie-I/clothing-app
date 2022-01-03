@@ -1,22 +1,35 @@
 {{-- Edit item --}}
 <div class="card">
     <div class="card-body fs-5">
-        <h2 class="card-title fs-3">Labot pārdošanā esošo mantu</h2>
+        <h2 class="card-title fs-3">Labot sludinājumu</h2>
 
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{route('item.update', $item->id)}}" class="row" enctype="multipart/form-data">
+        <form method="POST" action="{{route('item.update', $item->id)}}" class="row" enctype="multipart/form-data" novalidate>
             @csrf
                 <!-- Item Picture -->
                 <div>
                     <label for="picture" class="form-label">Pievienot bildi</label>
-                    <input id="picture" type="file" class="form-control" name="picture" required/>
+                    <input id="picture" type="file" class="form-control" name="picture"/>
                 </div>
 
                 <!-- Item Name -->
                 <div>
                     <label for="name" class="form-label">Nosaukums</label>
                     <input id="name" class="form-control" type="text" name="name" required value="{{$item->name}}"/>
+                </div>
+
+                <!-- Item Category-->
+                <div>
+                    <label for="category" class="form-label">Kategorija</label>
+                    <select id="category" name="category" class="form-select mb-3">
+                        <option value="0" disabled selected>Izvēlēties</option>
+                        @foreach ($categories as $category)
+                            <option value="{{$category->id}}" {{($item->category_id === $category->id) ? "selected" : ""}} >
+                                {{$category->name}}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <!-- Item State -->

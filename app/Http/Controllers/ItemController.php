@@ -12,10 +12,8 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
-    public function getAllItems(Request $request) {
-        // dd($request->query('category'));
-        // return item view
-
+    public function getAllItems(Request $request) 
+    {
         if ($request->query('category')) {
             return view('welcome', [
                 'items' => Item::with(['state', 'user'])->whereNull('sold_at')->where('category_id', $request->query('category'))->get(),
@@ -28,7 +26,8 @@ class ItemController extends Controller
         ]);
     }
 
-    public function getSingleItem(Item $item) {
+    public function getSingleItem(Item $item) 
+    {
         return view('item-info', [
             'item' => $item,
             'user' => $item->user,
@@ -37,60 +36,74 @@ class ItemController extends Controller
         ]);
     }
 
-    public function deleteItem(Item $item) {
-        if ($item->user_id === Auth::id() || Auth::user()->is_admin) 
-        {
+    public function deleteItem(Item $item) 
+    {
+        if ($item->user_id === Auth::id() || Auth::user()->is_admin) {
             $item->delete();
 
             return redirect('/')->with('message', 'Sludinājums izdzēsts!');
         }
 
-        return back()->with('error', 'Jūs nevarat izdzēst šo sludinājumu!');
+        abort(403);
     }
 
-    public function getItemDataForUpdate(Item $item) {
-        return view('edit-item-for-sale', [
-            'item' => $item,
-            'states' => ItemState::all(),
-        ]);
-    }
-
-    public function postItemDataForUpdate(Item $item, Request $request) {
-
-        $request->validate([
-            'name' => ['required', 'string', 'max:250'],
-            'picture' => ['required', 'image', 'max:10240'], //max image size is 10MB
-            'description' => ['required', 'string', 'min:10', 'max:2500'],
-            'price' => ['required', 'numeric', 'min:0', 'max:10000'],
-            'state' => ['required', 'integer', 'min:1', 'max:3'], //1 and 3 are state foreign keys 
-        ]);
-
-        $path = $request->file('picture')->store('public/images');
-        //convert any price to float with 2 digits after comma and then convert it to euro cents
-        $price = (number_format((float)$request->price, 2, '.', ''))*100;
-
-        $item->name = $request->name;
-        $item->image_path = $path;
-        $item->description = $request->description;
-        $item->price = $price ;
-        $item->state_id= $request->state;
-
-        $item->save();
-
-    return redirect('item/'.$item->id)->with('message', 'Sludinājums veiksmīgi atjaunots!');
-    }
-
-    public function changeItemSaleStatus(Item $item) {
-        if ($item->sold_at) {
-            $item->sold_at = NULL;
-        } else {
-            $item->sold_at = Carbon::now();
+    public function getItemDataForUpdate(Item $item) 
+    {
+        if (Auth::id () === $item->user_id) {
+            return view('edit-item-for-sale', [
+                'item' => $item,
+                'states' => ItemState::all(),
+                'categories' => Category::all(),
+            ]);
         }
 
-        $item->save();
+        abort(403);
+    }
 
-        return back()->with('message', 'Sludinājuma statuss ir veiksmīgi nomainīts!');
+    public function postItemDataForUpdate(Item $item, Request $request) 
+    {
+        if (Auth::id () === $item->user_id) {
+            $request->validate([
+                'name' => ['required', 'string', 'max:150'],
+                'picture' => ['required', 'image', 'max:10240'], //max image size is 10MB
+                'description' => ['required', 'string', 'min:10', 'max:2500'],
+                'price' => ['required', 'numeric', 'min:0', 'max:10000'],
+                'state' => ['required', 'integer', 'min:1', 'max:3'], //1 and 3 are state foreign keys 
+            ]);
 
+            $path = $request->file('picture')->store('public/images');
+            //convert any price to float with 2 digits after comma and then convert it to euro cents
+            $price = (number_format((float)$request->price, 2, '.', ''))*100;
+
+            $item->name = $request->name;
+            $item->image_path = $path;
+            $item->description = $request->description;
+            $item->price = $price ;
+            $item->state_id= $request->state;
+
+            $item->save();
+
+        return redirect('item/'.$item->id)->with('message', 'Sludinājums veiksmīgi atjaunots!');
+        }
+
+        abort(403);
+    }
+
+    public function changeItemSaleStatus(Item $item) 
+    {
+        if (Auth::id () === $item->user_id) {
+            if ($item->sold_at) {
+                $item->sold_at = NULL;
+            } else {
+                $item->sold_at = Carbon::now();
+            }
+
+            $item->save();
+
+            return back()->with('message', 'Sludinājuma statuss ir veiksmīgi nomainīts!');
+        }
+
+        abort(403);
     }
 
     public function getUserActiveItems()
