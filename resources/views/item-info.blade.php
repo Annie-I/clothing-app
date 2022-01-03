@@ -3,7 +3,12 @@
         <div class="container">
             <div class="row mt-10">
                 <div class="col-12">
-                    <x-single-item :item="$item" :user="$user" :state="$state"/>
+                    <x-single-item 
+                        :item="$item" 
+                        :user="$user" 
+                        :state="$state" 
+                        :category="$category"
+                    />
                 </div>
             </div>
         </div>

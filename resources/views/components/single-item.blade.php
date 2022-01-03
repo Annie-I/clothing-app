@@ -1,4 +1,4 @@
-{{-- User info --}}
+{{-- Single item information view --}}
 @if (session('message'))
     <div class="alert alert-success">
         {{ session('message') }}
@@ -11,25 +11,37 @@
 @endif
 <div class="card">
     <div class="card-body fs-5">
-        <p class="col-auto"><a href="/" class="text-decoration-none text-secondary">Visu sludinājumu saraksts</a></p>
-        <h3></h3>
+        {{-- Item name --}}
         <h2 class="card-title fs-3 m-2">{{$item->name}}</h2>
+        {{-- Item category --}}
+        <p class="text-capitalize m-2">{{$category->name}}</p>
+        <hr>
         <div class="row mb-2">
             <div class="col-6">
-                <p class="mb-2">{{$user->first_name}} {{$user->last_name}}</p>
-                {{-- cast back price to eur from eur cents --}}
-                <p class="mb-2">Cena: <span class="fw-bold">{{(number_format((float)($item->price), 2, '.', ''))/100}}€</span></p>
-                <p class="mb-2">Stāvoklis:  <span class="fw-bold">{{$state->name}}</span></p>
-                <p class="mb-2">Atrašanās vieta:  <span class="fw-bold">{{$user->location}}</span></p>
-                <p class="mb-2">Apraksts: <span class="fw-bold">{{$item->description}}</span></p>
-                {{-- <p class="mb-4">Pievienoja: <span class="fw-bold">{{$user->email}}</span></p> --}}
+                {{-- User who added this item with option to go to his profile --}}
+                <p class="mb-2 fw-bold">
+                    Pievienoja:
+                    <a href="/user/{{$user->id}}">{{$user->first_name}} {{$user->last_name}}</a>
+                </p>
+                {{-- Item price with casting it back to eur from eur cents --}}
+                <p class="mb-2"><span class="fw-bold">Cena:</span> {{(number_format((float)($item->price), 2, '.', ''))/100}}€</p>
+                {{-- Item state --}}
+                <p class="mb-2"><span class="fw-bold">Stāvoklis:</span> {{$state->name}}</p>
+                {{-- User location if he has added it to his profile --}}
+                @if ($user->location)
+                    <p class="mb-2"><span class="fw-bold"> Lietotāja atrašanās vieta:</span> {{$user->location}}</p>
+                @endif
+                {{-- Item description --}}
+                <p class="mb-2"><span class="fw-bold">Mantas apraksts:</span> {{$item->description}}</p>
             </div>
+            {{-- Item picture --}}
             <div class="col-6">
-            {{-- move image to the right and info - to the left --}}
                 <img src="{{Storage::url($item->image_path)}}">
             </div>
         </div>
+        {{-- Buttons --}}
         <div class="row">
+            {{-- If item owner is viewing this: --}}
             @if (Auth::user()->id === $item->user_id)
             <div class="col-auto">
                 <p><a href="{{route('item.edit', $item->id)}}" class="btn btn-primary">Labot sludinājumu</a></p>
@@ -51,10 +63,11 @@
                     @endif
                 </form>
             </div>
+            {{-- If any other user who does not own this item is viewing this: --}}
             @else
                 <p class="col-auto"><a href="/user/{{$user->id}}/compose-message" class="btn btn-primary">Sūtīt ziņu pārdevējam</a></p>
-                <p class="col-auto"><a href="/user/{{$user->id}}" class="btn btn-secondary">Apskatīt pārdevēja profilu</a></p>
             @endif
+            {{-- If other user who is an admin is viewing this: --}}
             <div class="col-auto">
                 @if (Auth::user()->is_admin && Auth::user()->id !== $item->user_id)
                     <form method="post" action="{{route('item.delete', $item->id)}}">
@@ -63,6 +76,7 @@
                     </form>
                 @endif
             </div>
+            {{-- If other user who is not an admin is viewing this: --}}
             <div class="col-auto">
                 @if (!Auth::user()->is_admin && Auth::user()->id !== $item->user_id)
                 <p class="col-auto"><a href="/compose-complaint" class="btn btn-danger">Ziņot par pārkāpumu</a></p>

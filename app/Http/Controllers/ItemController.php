@@ -33,6 +33,7 @@ class ItemController extends Controller
             'item' => $item,
             'user' => $item->user,
             'state' =>$item->state,
+            'category' => $item->category,
         ]);
     }
 
