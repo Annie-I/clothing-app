@@ -61,7 +61,7 @@ class DashboardController extends Controller
         $request->validate([
             'firstName' => ['required', 'string', 'max:150'],
             'lastName' => ['required', 'string', 'max:150'],
-            'birthDate' => ['required', 'date'],
+            'birthDate' => ['required', 'date', 'before:tomorrow', 'after:1900-01-01'],
             'location' => ['nullable', 'string', 'max: 120'],
         ]);
 
@@ -169,7 +169,7 @@ class DashboardController extends Controller
     {
         $request->validate([
         'title' => ['required', 'string', 'min:5', 'max:150'],
-        'content' => ['required', 'string', 'min:10', 'max:1500'],
+        'content' => ['required', 'string', 'min:2', 'max:1500'],
         ]);
 
         $sender = Auth::user();
