@@ -99,31 +99,63 @@ class UserController extends Controller
 
     public function viewFormToAddReview(User $user)
     {
-        return view('add-or-edit-review', [
-            'user' => $user,
-            'review' => Review::where('user_id', Auth::id())
-                                ->where('receiver_id', $user->id)
-                                ->whereNull('deleted_at')
-                                ->first(),
-        ]);
+        $sentMessages = Message::where('sender_id', Auth::id())
+        ->where('receiver_id', $user->id)
+        ->get();
+
+        $receivedMessages = Message::where('sender_id', $user->id)
+            ->where('receiver_id', Auth::id())
+            ->get();
+
+        $hasCommunicated = count($sentMessages) + count($receivedMessages);
+
+        if ($hasCommunicated) {
+            return view('add-or-edit-review', [
+                'user' => $user,
+                'review' => Review::where('user_id', Auth::id())
+                                    ->where('receiver_id', $user->id)
+                                    ->whereNull('deleted_at')
+                                    ->first(),
+            ]);
+        }
+
+        abort(403);
     }
 
     public function postFormToAddReview(Request $request, User $user)
     {
-        $request->validate([
-            'rating' => ['required', 'integer', 'min:0', 'max:5'],
-            'review' => ['required', 'string', 'min:5', 'max:250'],
-        ]);
+        $sentMessages = Message::where('sender_id', Auth::id())
+        ->where('receiver_id', $user->id)
+        ->get();
 
-        $review = Auth::user()->reviews()->create([
-            'receiver_id' => $user->id,
-            'rating' => $request->rating,
-            'review' => $request->review,
-        ]);
+        $receivedMessages = Message::where('sender_id', $user->id)
+            ->where('receiver_id', Auth::id())
+            ->get();
 
-        return redirect('user/'.$user->id)->with('message', 'Atsauksme veiksmīgi pievienota!');
+        $hasCommunicated = count($sentMessages) + count($receivedMessages);
+
+        $review = Review::where('user_id', Auth::id())
+                        ->where('receiver_id', $user->id)
+                        ->whereNull('deleted_at')
+                        ->first();
+
+        if ($hasCommunicated && !$review) {
+            $request->validate([
+                'rating' => ['required', 'integer', 'min:0', 'max:5'],
+                'review' => ['required', 'string', 'min:5', 'max:500'],
+            ]);
+
+            $review = Auth::user()->reviews()->create([
+                'receiver_id' => $user->id,
+                'rating' => $request->rating,
+                'review' => $request->review,
+            ]);
+
+            return redirect('user/'.$user->id)->with('message', 'Atsauksme veiksmīgi pievienota!');
+        }
+
+        abort(403);
     }
-
 
     public function viewFormToEditReview(User $user)
     {
@@ -132,14 +164,14 @@ class UserController extends Controller
                         ->whereNull('deleted_at')
                         ->first();
 
-        if ($review->user_id !==  Auth::id()) {
-            abort(403);
+        if ($review) {
+            return view('add-or-edit-review', [
+                'user' => $user,
+                'review' => $review,
+            ]);
         }
 
-        return view('add-or-edit-review', [
-            'user' => $user,
-            'review' => $review,
-        ]);
+        abort(403);
     }
     
     public function postFormToEditReview(Request $request, User $user)
@@ -149,20 +181,20 @@ class UserController extends Controller
                 ->whereNull('deleted_at')
                 ->first();
 
-        if ($review->user_id !==  Auth::id()) {
-            abort(403);
+        if ($review) {
+            $request->validate([
+                'rating' => ['required', 'integer', 'min:0', 'max:5'],
+                'review' => ['required', 'string', 'min:5', 'max:500'],
+            ]);
+    
+            $review->rating = $request->rating;
+            $review->review = $request->review;
+            $review->save();
+    
+            return redirect('user/'.$review->receiver_id)->with('message', 'Atsauksme veiksmīgi atjaunota!');
         }
-        
-        $request->validate([
-            'rating' => ['required', 'integer', 'min:0', 'max:5'],
-            'review' => ['required', 'string', 'min:5', 'max:250'],
-        ]);
 
-        $review->rating = $request->rating;
-        $review->review = $request->review;
-        $review->save();
-
-        return redirect('user/'.$review->receiver_id)->with('message', 'Atsauksme veiksmīgi atjaunota!');
+        abort(403);
     }
 
     public function deleteReview(User $user) 
@@ -172,14 +204,13 @@ class UserController extends Controller
                         ->whereNull('deleted_at')
                         ->first();
 
-        if ($review->user_id === Auth::id() || Auth::user()->is_admin) 
-        {
+        if ($review|| Auth::user()->is_admin) {
             $review->delete();
 
             return redirect('user/'.$review->receiver_id)->with('message', 'Atsauksme dzēsta!');
         }
 
-        return back()->with('error', 'Jūs nevarat dzēst šo atsauksmi!');
+        abort(403);
     }
     
     public function getAllReviewsAboutUser(User $user)

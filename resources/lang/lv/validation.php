@@ -87,9 +87,9 @@ return [
     'mimes' => 'The :attribute must be a file of type: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
-        'numeric' => 'The :attribute must be at least :min.',
+        'numeric' => 'Lauka ":attribute" vērtībai jābūt vismaz :min.',
         'file' => 'The :attribute must be at least :min kilobytes.',
-        'string' => 'Lauka ":attribute" saturam jāsatur vismaz :min simbolu garam.',
+        'string' => 'Lauka ":attribute" saturam jābūt vismaz :min simbolu garam.',
         'array' => 'The :attribute must have at least :min items.',
     ],
     'multiple_of' => 'The :attribute must be a multiple of :value.',
@@ -165,6 +165,11 @@ return [
         'state' => 'Mantas stāvoklis',
         'price' => 'Cena',
         'description' => 'Apraksts',
+        'location' => 'Atrašanās vieta',
+        'new_password' => 'Jaunā parole',
+        'new_password_confirmation' => 'Jaunā parole atkārtoti',
+        'rating' => 'Vērtējums',
+        'review' => 'Atsauksme',
     ],
 
 ];

@@ -4,13 +4,13 @@
 
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{route('review.add', $user)}}" enctype="multipart/form-data">
+        <form method="POST" action="{{route('review.add', $user)}}" enctype="multipart/form-data" novalidate>
             @csrf
             <!-- Rating-->
             <p class="form-label ml-2 mt-4"> Kā Jūs vērtētu sadarbību ar šo lietotāju? (0 - ļoti slikti, 5 - izcili) </p>
             @for ($n = 0; $n <= 5; $n++)
                 <div class="form-check form-check-inline ml-2 fs-6">
-                    <input class="form-check-input" type="radio" name="rating" id="rating{{$n}}" value="{{$n}}" required>
+                    <input class="form-check-input" type="radio" name="rating" id="rating{{$n}}" value="{{$n}}">
                     <label class="form-check-label" for="rating{{$n}}">{{$n}}</label>
                 </div>
             @endfor
@@ -18,7 +18,7 @@
             <!-- Review -->
             <div class="m-2">
                 <label for="review" class="form-label">Atsauksme</label>
-                <textarea id="review" name="review" class="form-control" required></textarea>
+                <textarea id="review" name="review" class="form-control"></textarea>
             </div>
 
             <!-- Buttons -->

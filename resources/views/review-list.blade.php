@@ -7,8 +7,8 @@
                         <p class="col-auto"><a href="/user/{{$user->id}}" class="text-decoration-none text-secondary">< Atpakaļ uz lietotāja profilu</a></p>
                         <p class="fs-3 m-2">Par lietotāju x y atstātās atsauksmes</p>
                         <div class="row">
-                            @if (!$reviews)
-                                <p>Sarakstam šobrīd nav pievienots neviens favorīts.</p>
+                            @if (!count($reviews))
+                                <p class="ml-2"> Par lietotāju pagaidām nav atstāta neviena atsauksme.</p>
                             @endif
                             @foreach ($reviews as $review)
                                 <div>
