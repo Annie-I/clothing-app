@@ -6,7 +6,7 @@
                     <div class="card">
                         <div class="card-body fs-5">
                             <h2 class="card-title fw-bold fs-3 m-2">Problemātisks {{$complaint->subject->name}}</h2>
-                            <p class="ml-2">Sūdzības status: <span class="fw-bold">{{$complaint->status->name}}</span></p>
+                            <p class="ml-2">Sūdzības statuss: <span class="fw-bold">{{$complaint->status->name}}</span></p>
                             <p class="m-2">Iesniedza: {{$complaint->user->first_name}} {{$complaint->user->last_name}}, {{$complaint->created_at}} </p>
                             <p class="m-2">{{$complaint->content}} </p>
                             <x-auth-validation-errors class="mb-4" :errors="$errors" />
@@ -14,7 +14,7 @@
                                 @csrf
                                 <!-- Complaint status-->
                                 <div>
-                                    <label for="status" class="form-label">Status</label>
+                                    <label for="status" class="form-label">Statuss</label>
                                     <select id="status" name="status" class="form-select mb-3">
                                         @foreach ($statuses as $status)
                                             <option value="{{$status->id}}" {{($complaint->status_id === $status->id) ? "selected" : ""}} required>

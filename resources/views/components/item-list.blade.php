@@ -8,6 +8,7 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">{{$item->name}}</h5>
+                    <p>Kategorija: {{$item->category->name}}</p>
                     <p>{{(number_format((float)($item->price), 2, '.', ''))/100}}€</p>
                     @if ($item->sold_at)
                         <a href="/item/{{$item->id}}" class="btn btn-secondary mt-2">Apskatīt</a>

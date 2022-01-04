@@ -7,7 +7,7 @@
                         <div class="card-body fs-5">
                             <p class="col-auto"><a href="/new-complaint-list" class="text-decoration-none text-secondary">< Saņemto sūdzību saraksts</a></p>
                             <h2 class="card-title fw-bold fs-3 m-2">Problemātisks {{$complaint->subject->name}}</h2>
-                            <p class="ml-2">Sūdzības status: <span class="fw-bold">{{$complaint->status->name}}</span></p>
+                            <p class="ml-2">Sūdzības statuss: <span class="fw-bold">{{$complaint->status->name}}</span></p>
                             <p class="m-2">Iesniedza: {{$complaint->user->first_name}} {{$complaint->user->last_name}}, {{$complaint->created_at}} </p>
                             <p class="m-2">{{$complaint->content}} </p>
                             <div class="row mt-5">
