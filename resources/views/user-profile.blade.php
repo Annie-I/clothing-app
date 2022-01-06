@@ -5,8 +5,9 @@
                 <div class="col-12">
                     <x-public-profile 
                         :user="$user" 
-                        :isFavorited="$isFavorited ?? ''" 
+                        :isFavorited="$isFavorited" 
                         :itemCount="$itemCount" 
+                        :activeItemCount="$activeItemCount" 
                         :hasCommunicated="$hasCommunicated" 
                         :review="$review"
                         :reviews="$reviews"

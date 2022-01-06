@@ -27,7 +27,13 @@ class DashboardController extends Controller
     public function getUserProfile()
     {
         $user = Auth::user();
-        $itemCount = $user->items->count();
+        
+        $userActiveItems = Item::where('user_id', $user->id)
+                                ->whereNull('deleted_at')
+                                ->whereNull('sold_at')
+                                ->get();
+
+        $activeItemCount = count($userActiveItems);
 
         $reviews = Review::where('receiver_id', $user->id)
                         ->whereNull('deleted_at')
@@ -40,7 +46,7 @@ class DashboardController extends Controller
 
         return view('dashboard', [
             'user' => $user,
-            'itemCount' => $itemCount,
+            'activeItemCount' => $activeItemCount,
             'reviews' => $reviews,
             'allRatingSum' => $allRatingSum,
         ]);
@@ -86,8 +92,27 @@ class DashboardController extends Controller
 
     public function addToFavorites(User $user)
     {
-        Auth::user()->favorites()->attach($user->id);
-        return back()->with('message', 'Lietotājs pievienots favorītiem!');
+        // User can't add himself to his favorite list
+        if (Auth::id() === $user->id) {
+            return back()->with('error', 'Jūs nevarat pievienot sevi favorītu sarakstam!');
+        }
+        // Check if user has at least one item added that is not deleted
+        $userItems = Item::where('user_id', $user->id)
+                            ->whereNull('deleted_at')
+                            ->get();
+
+        //Check if user is already added as favorite
+        $isFavorited = Auth::user()->favorites()->firstWhere('favorite_id', $user->id);
+
+        //user can be added to favorites only if he has at least one item and is not already added to favorite list
+        if (count($userItems) && !$favorited) {
+            Auth::user()->favorites()->attach($user->id);
+            return back()->with('message', 'Lietotājs pievienots favorītiem!');
+        } else if (count($userItems) && $favorited) {
+            return back()->with('error', 'Lietotājs jau ir Jūsu favorītu sarakstā!');
+        }
+
+        return back()->with('error', 'Šo lietotāju nevar pievienot favorītiem!');
     }
 
     public function removeFromFavorites(User $user)

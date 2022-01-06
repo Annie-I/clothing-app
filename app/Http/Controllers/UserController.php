@@ -22,7 +22,18 @@ class UserController extends Controller
 
         $favorites = Auth::user()->favorites;
 
-        $itemCount = $user->items->count();
+        $userItems = Item::where('user_id', $user->id)
+        ->whereNull('deleted_at')
+        ->get();
+
+        $itemCount = count($userItems);
+
+        $userActiveItems = Item::where('user_id', $user->id)
+                                ->whereNull('deleted_at')
+                                ->whereNull('sold_at')
+                                ->get();
+
+        $activeItemCount = count($userActiveItems);
 
         $sentMessages = Message::where('sender_id', Auth::id())
         ->where('receiver_id', $user->id)
@@ -45,6 +56,7 @@ class UserController extends Controller
             'user' => $user,
             'isFavorited' => $favorites->contains($user),
             'itemCount' => $itemCount,
+            'activeItemCount' => $activeItemCount,
             'hasCommunicated' => count($sentMessages) + count($receivedMessages),
             'review' => Review::where('user_id', Auth::id())
                                 ->where('receiver_id', $user->id)

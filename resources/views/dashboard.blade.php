@@ -9,7 +9,7 @@
                     <x-public-profile 
                         :user="$user" 
                         :isFavorited="$isFavorited ?? ''"
-                        :itemCount="$itemCount"
+                        :activeItemCount="$activeItemCount"
                         :reviews="$reviews"
                         :allRatingSum="$allRatingSum"
                     />

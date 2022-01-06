@@ -1,16 +1,23 @@
 {{-- User public profile info --}}
-@if (session('message'))
-    <div class="alert alert-success">
-        {{ session('message') }}
-    </div>
-@endif
 <div class="card">
     <div class="card-body">
+        {{-- Message block --}}
+        @if (session('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
+        @if (session('error'))
+            <div class="alert alert-danger fs-6">
+                {{ session('error') }}
+            </div>
+        @endif
+        {{-- --- --}}
         <div class="row">
             <h2 class="card-title fs-3 col-auto">{{$user->first_name}} {{$user->last_name}}</h2>
             {{-- add / remove from favorite list --}}
             <div class="col-auto">
-                @if ($user->id !== Auth::id() )
+                @if ($user->id !== Auth::id() && $itemCount)
                     @if ($isFavorited)
                         <form action="/user/{{$user->id}}/remove-from-favorites" method="post">
                             @csrf
@@ -41,7 +48,7 @@
             <p class="fs-5 mt-3">Par šo lietotāju pagaidām nav atstāta neviena atsauksme.</p>
         @endif
         {{-- If user doesnt have any active items in sale: --}}
-        @if (!$itemCount)
+        @if (!$activeItemCount)
             <p>Šim lietotājam nav aktīvu sludinājumu.</p>
         @endif
         <div class="row">
@@ -58,7 +65,7 @@
                 <a href="/user/{{$user->id}}/all-reviews" class="btn btn-primary m-2 col-auto">Par lietotāju atstātās atsauksmes</a>
             @endif
             {{-- Button to view user ads if there are any--}}
-            @if ($itemCount > 0)
+            @if ($activeItemCount > 0)
                 <a href="/user/{{$user->id}}/active-items" class="btn btn-primary m-2 col-auto">Apskatīt lietotāja sludinājumus</a>
             @endif
             {{-- Button for admin to block the user --}}
