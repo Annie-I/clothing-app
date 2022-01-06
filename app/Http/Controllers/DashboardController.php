@@ -105,10 +105,10 @@ class DashboardController extends Controller
         $isFavorited = Auth::user()->favorites()->firstWhere('favorite_id', $user->id);
 
         //user can be added to favorites only if he has at least one item and is not already added to favorite list
-        if (count($userItems) && !$favorited) {
+        if (count($userItems) && !$isFavorited) {
             Auth::user()->favorites()->attach($user->id);
             return back()->with('message', 'Lietotājs pievienots favorītiem!');
-        } else if (count($userItems) && $favorited) {
+        } else if (count($userItems) && $isFavorited) {
             return back()->with('error', 'Lietotājs jau ir Jūsu favorītu sarakstā!');
         }
 
