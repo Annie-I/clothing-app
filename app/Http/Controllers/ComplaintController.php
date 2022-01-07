@@ -26,12 +26,12 @@ class ComplaintController extends Controller
     {
         $request->validate([
         'subject' => ['required', 'integer', 'min:1', 'max:2'], //1 - 2 are state foreign keys 
-        'content' => ['required', 'string', 'min:10', 'max:500'],
+        'complaintContent' => ['required', 'string', 'min:10', 'max:500'],
         ]);
 
         $message = Auth::user()->complaints()->create([
             'subject_id' => $request->subject,
-            'content' => $request->content,
+            'content' => $request->complaintContent,
             'status_id' => '1',
         ]);
 

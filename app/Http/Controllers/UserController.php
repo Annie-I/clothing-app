@@ -92,21 +92,24 @@ class UserController extends Controller
             'blockedUsers' => User::where('is_blocked', 1)->get(),
         ]);
     }
+
+    public function updateSystemAvailability (User $user)
+    {
+        if (Auth::user()->is_admin) {
+            if ($user->is_blocked) {
+                $user->is_blocked = '0';
+                $user->save();
+
+                return redirect('/blocked-users')->with('message', 'Lietotāja piekļuve sistēmai veiksmīgi atjaunota!');
+            } 
+            
+            $user->is_blocked = '1';
+            $user->save();
     
-    public function unblockUser(User $user)
-    {
-        $user->is_blocked = '0';
-        $user->save();
+            return redirect('/blocked-users')->with('message', 'Lietotāja piekļuve sistēmai ir liegta!');
+        }
 
-        return redirect('/blocked-users')->with('message', 'Lietotājs veiksmīgi atbloķēts!');
-    }
-
-    public function blockUser(User $user)
-    {
-        $user->is_blocked = '1';
-        $user->save();
-
-        return redirect('/blocked-users')->with('message', 'Lietotāja piekļuve sistēmai bloķēta!');
+        abort(403);
     }
 
     public function viewFormToAddReview(User $user)
@@ -209,14 +212,14 @@ class UserController extends Controller
         abort(403);
     }
 
-    public function deleteReview(User $user) 
+    public function deleteReview(Review $review) 
     {
-        $review = Review::where('user_id', Auth::id())
-                        ->where('receiver_id', $user->id)
+        $review = Review::where('user_id', $review->user_id)
+                        ->where('receiver_id', $review->receiver_id)
                         ->whereNull('deleted_at')
                         ->first();
 
-        if ($review|| Auth::user()->is_admin) {
+        if ($review->user_id === Auth::id() || Auth::user()->is_admin) {
             $review->delete();
 
             return redirect('user/'.$review->receiver_id)->with('message', 'Atsauksme dzēsta!');

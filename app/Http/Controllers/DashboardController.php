@@ -227,18 +227,26 @@ class DashboardController extends Controller
 
     public function deleteSentMessage(Message $message)
     {
-        $message->sender_deleted_at = Carbon::now();
-        $message->save();
-
-        return redirect('/sent-messages')->with('message', 'Ziņa veiksmīgi izdzēsta no jūsu pastkastītes!');
+        if ($message->sender_id === Auth::id()) {
+            $message->sender_deleted_at = Carbon::now();
+            $message->save();
+    
+            return redirect('/sent-messages')->with('message', 'Ziņa veiksmīgi izdzēsta no jūsu pastkastītes!');
+        }
+        
+        abort(403);
     }
     
     public function deleteReceivedMessage(Message $message)
     {
-        $message->receiver_deleted_at = Carbon::now();
-        $message->save();
+        if ($message->receiver_id === Auth::id()) {
+            $message->receiver_deleted_at = Carbon::now();
+            $message->save();
+    
+            return redirect('/received-messages')->with('message', 'Ziņa veiksmīgi izdzēsta no jūsu pastkastītes!');
+        }
 
-        return redirect('/received-messages')->with('message', 'Ziņa veiksmīgi izdzēsta no jūsu pastkastītes!');
+        abort(403);
     }
 
 }

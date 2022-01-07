@@ -87,7 +87,7 @@ return [
     'mimes' => 'The :attribute must be a file of type: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
-        'numeric' => 'Lauka ":attribute" vērtībai jābūt vismaz :min.',
+        'numeric' => 'Lauka ":attribute" vērtībai ir jābūt vismaz :min.',
         'file' => 'The :attribute must be at least :min kilobytes.',
         'string' => 'Lauka ":attribute" saturam jābūt vismaz :min simbolu garam.',
         'array' => 'The :attribute must have at least :min items.',
@@ -170,6 +170,10 @@ return [
         'new_password_confirmation' => 'Jaunā parole atkārtoti',
         'rating' => 'Vērtējums',
         'review' => 'Atsauksme',
+        'title' =>  'Ziņas tēma',
+        'content' => 'Ziņas saturs',
+        'subject' => 'Par ko ir sūdzība',
+        'complaintContent' => 'Iemesls',
     ],
 
 ];
