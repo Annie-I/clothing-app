@@ -23,7 +23,7 @@ class ItemFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => $this->faker->numberBetween($min = 1, $max = 15),
+            'user_id' => $this->faker->numberBetween($min = 1, $max = 20),
             'name' => $this->faker->text($maxNbChars = 100),
             'price' => $this->faker->numberBetween($min = 0, $max = 10000),
             'state_id' => $this->faker->numberBetween($min = 1, $max = 3),

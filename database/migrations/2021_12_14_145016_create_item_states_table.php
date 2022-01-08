@@ -18,20 +18,6 @@ class CreateItemStatesTable extends Migration
             $table->id();
             $table->string('name');
         });
-
-
-        $states = [
-            'jauns',
-            'mazlietots',
-            'lietots',
-        ];
-
-        foreach($states as $state)
-        {
-            DB::table('item_states')->insert([
-                'name' => $state,
-            ]);
-        }
     }
 
     /**

@@ -11,7 +11,7 @@
                         :hasCommunicated="$hasCommunicated" 
                         :review="$review"
                         :reviews="$reviews"
-                        :allRatingSum="$allRatingSum"
+                        :rating="$rating"
                     />
                 </div>
             </div>

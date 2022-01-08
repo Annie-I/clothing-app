@@ -17,20 +17,6 @@ class CreateComplaintStatusesTable extends Migration
             $table->id();
             $table->string('name');
         });
-
-
-        $statuses = [
-            'jauna',
-            'tiek izskatīta',
-            'aizvērta',
-        ];
-
-        foreach($statuses as $status)
-        {
-            DB::table('complaint_statuses')->insert([
-                'name' => $status,
-            ]);
-        }
     }
 
     /**

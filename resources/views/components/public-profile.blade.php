@@ -45,7 +45,7 @@
         {{-- If there are any reviews left about the user then show avg rating --}}
         <div>
             @if (count($reviews))
-                <p class="fs-5 mb-4">Lietotāja vidējais novērtējums: {{$allRatingSum / count($reviews)}} / 5</p>
+                <p class="fs-5 mb-4">Lietotāja vidējais novērtējums: {{$rating}} / 5</p>
             @else
                 <p class="fs-5 mb-4">Par šo lietotāju pagaidām nav atstāta neviena atsauksme.</p>
             @endif

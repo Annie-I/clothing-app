@@ -52,6 +52,11 @@ class UserController extends Controller
             $allRatingSum = $allRatingSum + $review->rating;
         }
 
+        $rating = 0;
+        if (count($reviews)) {
+            $rating = (number_format((float)$allRatingSum / count($reviews), 2, '.',));
+        }
+
         return view('user-profile', [
             'user' => $user,
             'isFavorited' => $favorites->contains($user),
@@ -63,7 +68,7 @@ class UserController extends Controller
                                 ->whereNull('deleted_at')
                                 ->first(),
             'reviews' => $reviews,
-            'allRatingSum' => $allRatingSum,
+            'rating' => $rating,
         ]);
     }
 

@@ -17,19 +17,6 @@ class CreateComplaintSubjectsTable extends Migration
             $table->id();
             $table->string('name');
         });
-
-
-        $subjects = [
-            'lietotājs',
-            'sludinājums',
-        ];
-
-        foreach($subjects as $subject)
-        {
-            DB::table('complaint_subjects')->insert([
-                'name' => $subject,
-            ]);
-        }
     }
 
     /**

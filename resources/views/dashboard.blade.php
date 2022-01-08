@@ -11,7 +11,7 @@
                         :isFavorited="$isFavorited ?? ''"
                         :activeItemCount="$activeItemCount"
                         :reviews="$reviews"
-                        :allRatingSum="$allRatingSum"
+                        :rating="$rating"
                     />
                 </div>
             </div>

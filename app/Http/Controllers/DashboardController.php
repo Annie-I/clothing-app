@@ -44,11 +44,16 @@ class DashboardController extends Controller
             $allRatingSum = $allRatingSum + $review->rating;
         }
 
+        $rating = 0;
+        if (count($reviews)) {
+            $rating = (number_format((float)$allRatingSum / count($reviews), 2, '.',));
+        }
+
         return view('dashboard', [
             'user' => $user,
             'activeItemCount' => $activeItemCount,
             'reviews' => $reviews,
-            'allRatingSum' => $allRatingSum,
+            'rating' => $rating,
         ]);
     }
 

@@ -17,35 +17,6 @@ class CreateCategoriesTable extends Migration
             $table->id();
             $table->string('name');
         });
-
-        $categories = [
-            'sieviešu aksesuāri',
-            'sieviešu apavi',
-            'sieviešu apģērbs',
-            'vīriešu aksesuāri',
-            'vīriešu apavi',
-            'vīriešu apģērbs',
-            'bērnu aksesuāri',
-            'bērnu apavi',
-            'bērnu apģērbs',
-            'bērnu rotaļlietas',
-            'bērnu skolas piederumi',
-            'dekori',
-            'grāmatas',
-            'interjera priekšmeti',
-            'mēbeles',
-            'remontam',
-            'tehnika',
-            'instrumenti',
-            'cits',
-        ];
-
-        foreach($categories as $category)
-        {
-            DB::table('categories')->insert([
-                'name' => $category,
-            ]);
-        }
     }
 
     /**
