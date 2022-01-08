@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="content">
         <div class="container d-flex justify-content-center pt-3">
-            <div class="card m-5 pl-10 pr-10">
-                <div class="container mt-3">
-                    <h3 class="card-title fs-4 mt-2 text-center">Atiestatīt paroli</h3>
-                    <hr class="mb-1">
+            <div class="card solo-card">
+                <div class="container">
                     <div class="card-body fs-5">
+                        <h2 class="card-title fs-4 mb-3 text-center">Atiestatīt paroli</h2>
+                        <hr>
                         <p >Ievadi savu e-pasta adresi un mēs Tev nosūtīsim paroles nomaiņas saiti!</p>
                         <!-- Session Status -->
                         <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -14,13 +14,13 @@
                         <form method="POST" action="{{route('password.email')}}" novalidate>
                             @csrf
                             <!-- Email Address -->
-                            <div>
+                            <div class="mb-4">
                                 <label for="email" class="form-label">E-pasts</label>
                                 <input id="email" class="form-control" type="email" name="email" required autofocus/>
                             </div>
                             <!-- Button-->
                             <div class="d-flex justify-content-center">
-                                <p class="col-auto"><button type="submit" class="btn btn-success">Saņemt ziņu</button></p>
+                                <button type="submit" class="btn btn-success full-width">Saņemt ziņu</button>
                             </div>
                         </form>
                     </div>

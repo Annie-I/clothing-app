@@ -32,6 +32,27 @@ body {
     margin-top: 0.5rem;
 }
 
-.form-control {
-    margin-bottom: 0.5rem;
+.card-img-top {
+    width: 100%;
+    min-height: 150px;
+    height: 10vw;
+    object-fit: contain;
+}
+
+.item-img {
+    width: 100%;
+    max-height: 35vw;
+    object-fit: contain;
+}
+
+.solo-card {
+    max-width: 500px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .btn.full-width {
+        width: 100%;
+        margin-right: 0;
+    }
 }

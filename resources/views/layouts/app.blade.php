@@ -5,7 +5,7 @@
         <!-- <div class="min-h-screen bg-gray-100"> -->
 
             <!-- Page Heading -->
-            <header class="shadow">
+            <header class="shadow mb-4">
                 <x-top-menu/>
             </header>
 

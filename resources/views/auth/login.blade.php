@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="content">
         <div class="container d-flex justify-content-center pt-3">
-            <div class="card m-5 pl-10 pr-10">
-                <div class="container mt-3">
-                    <h3 class="card-title fs-4 mt-2 text-center">Pieteikties sistēmā</h3>
-                    <hr class="mb-1">
+            <div class="card solo-card">
+                <div class="container">
                     <div class="card-body fs-5">
+                        <h2 class="card-title fs-4 text-center">Pieteikties sistēmā</h2>
+                        <hr>
                         <!-- Session Status -->
                         <x-auth-session-status class="mb-4" :status="session('status')"/>
                         <!-- Validation Errors -->
@@ -14,24 +14,24 @@
                         <form method="POST" action="{{route('login')}}" novalidate>
                             @csrf
                             <!-- Email Address -->
-                            <div>
+                            <div class="mb-2">
                                 <label for="email" class="form-label">E-pasts</label>
                                 <input id="email" class="form-control" type="email" name="email" required autofocus/>
                             </div>
                             <!-- Password -->
-                            <div>
+                            <div class="mb-2">
                                 <label for="password" class="form-label">Parole</label>
                                 <input id="password" class="form-control"type="password" name="password" required autocomplete="current-password"/>
                             </div>
                             <!-- Remember Me -->
-                            <div>
+                            <div class="mb-4">
                                 <label for="remember_me" class="inline-flex items-center">
                                     <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
                                     <span class="ml-2 text-sm text-gray-600">{{ __('Atcerēties mani') }}</span>
                                 </label>
                             </div>
                             <!-- Buttons -->
-                            <div class="row mt-4">
+                            <div class="row">
                                 <div class="col-auto">
                                     <p class="col-auto"><button type="submit" class="btn btn-success">Pieteikties</button></p>
                                 </div>

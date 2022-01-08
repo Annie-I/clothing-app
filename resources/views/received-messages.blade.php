@@ -8,7 +8,7 @@
                 <div class="col-12 col-md-9">
                     <div class="card">
                         <div class="card-body">
-                            <h2 class="card-title fs-3 m-2">Ziņas</h2>
+                            <h2 class="card-title fs-3 mb-3">Ziņas</h2>
                             {{-- block to show success messages --}}
                             @if (session('message'))
                                 <div class="alert alert-success">
