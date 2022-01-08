@@ -85,27 +85,9 @@ Route::get('/message/{message}/read', [DashboardController::class, 'viewSingleMe
 Route::post('/message/{message}/deleteSent', [DashboardController::class, 'deleteSentMessage'])->middleware(['verified'])->name('sent.message.delete');
 Route::post('/message/{message}/deleteReceived', [DashboardController::class, 'deleteReceivedMessage'])->middleware(['verified'])->name('received.message.delete');
 
-//View blocked user list
-Route::get('/blocked-users', [UserController::class, 'getBlockedUsers'])->middleware(['verified']); //add EnsureIsAdmin middleware
-
-//Block / unblock user
-Route::post('/user/{user}/update-system-availability', [UserController::class, 'updateSystemAvailability'])->middleware(['verified'])->name('user.update.availability');  //add EnsureIsAdmin middleware
-
 //Write and send a complait to administration
 Route::get('/compose-complaint', [ComplaintController::class, 'viewFormToComposeComplaint'])->middleware(['verified']);
 Route::post('/compose-complaint', [ComplaintController::class, 'postComplaint'])->middleware(['verified'])->name('complaint.send');
-
-//Admin complaint lists
-Route::get('/new-complaint-list', [ComplaintController::class, 'getNewComplaints'])->middleware(['verified']); //add EnsureIsAdmin middleware
-Route::get('/in-progress-complaint-list', [ComplaintController::class, 'getInProgressComplaints'])->middleware(['verified']); //add EnsureIsAdmin middleware
-Route::get('/closed-complaint-list', [ComplaintController::class, 'getClosedComplaints'])->middleware(['verified']); //add EnsureIsAdmin middleware
-
-//View complaint
-Route::get('/complaint/{complaint}/view', [ComplaintController::class, 'getSingleComplaint'])->middleware(['verified']); //add EnsureIsAdmin middleware
-
-//Edit complaint status
-Route::get('/complaint/{complaint}/edit', [ComplaintController::class, 'viewFormToEditComplaint'])->middleware(['verified']); //add EnsureIsAdmin middleware
-Route::post('/complaint/{complaint}/edit', [ComplaintController::class, 'postFormToEditComplaint'])->middleware(['verified']) ->name('complaint.status.update'); //add EnsureIsAdmin middleware
 
 //Add review
 Route::get('/user/{user}/add-review', [UserController::class, 'viewFormToAddReview'])->middleware(['verified']);
@@ -125,5 +107,25 @@ Route::get('/user/{user}/all-reviews', [UserController::class, 'getAllReviewsAbo
 Route::get('/change-password', [UserController::class, 'viewFormToChangePassword'])->middleware(['verified']);
 Route::post('/change-password', [UserController::class, 'postFormToChangePassword'])->middleware(['verified'])->name('password.change');
 
+// Admin route group
+Route::middleware(['verified', 'admin'])->group(function () {
+    //View blocked user list
+    Route::get('/blocked-users', [UserController::class, 'getBlockedUsers']);
+
+    //Block / unblock user
+    Route::post('/user/{user}/update-system-availability', [UserController::class, 'updateSystemAvailability'])->middleware(['verified'])->name('user.update.availability');
+
+    //Admin complaint lists
+    Route::get('/new-complaint-list', [ComplaintController::class, 'getNewComplaints']);
+    Route::get('/in-progress-complaint-list', [ComplaintController::class, 'getInProgressComplaints']);
+    Route::get('/closed-complaint-list', [ComplaintController::class, 'getClosedComplaints']);
+
+    //View complaint
+    Route::get('/complaint/{complaint}/view', [ComplaintController::class, 'getSingleComplaint']);
+
+    //Edit complaint status
+    Route::get('/complaint/{complaint}/edit', [ComplaintController::class, 'viewFormToEditComplaint']);
+    Route::post('/complaint/{complaint}/edit', [ComplaintController::class, 'postFormToEditComplaint'])->name('complaint.status.update');
+});
 
 require __DIR__.'/auth.php';
