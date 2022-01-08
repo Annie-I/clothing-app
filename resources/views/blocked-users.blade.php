@@ -22,16 +22,13 @@
                                     <div class="col-4">
                                         <div class="card">
                                             <div class="card-body">
-                                                <h5 class="card-title text-truncate">{{$user->first_name}} {{$user->last_name}}</h5>
-                                                <div class="row">
-                                                    <a href="/user/{{$user->id}}" class="col-auto btn btn-primary">Atvērt profilu</a>
-                                                    <div class="col-auto">
-                                                        <form method="post" action="{{route('user.unblock', $user->id)}}">
+                                                <a href="/user/{{$user->id}}" class="card-title text-truncate fw-bold fs-5">{{$user->first_name}} {{$user->last_name}}</a>
+                                                {{-- <h5 class="card-title text-truncate">{{$user->first_name}} {{$user->last_name}}</h5> --}}
+                                                    {{-- <a href="/user/{{$user->id}}" class="col-6 btn btn-primary">Atvērt profilu</a> --}}
+                                                        <form method="post" class="d-flex justify-content-center mt-3" action="{{route('user.update.availability', $user->id)}}">
                                                             @csrf
-                                                            <button type="submit" class="btn btn-danger">Atbloķēt</p>
+                                                            <button type="submit" class="btn btn-success">Atjaunot piekļuvi</p>
                                                         </form>
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

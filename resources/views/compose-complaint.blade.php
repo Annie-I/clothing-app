@@ -12,29 +12,29 @@
                                 </div>
                             @endif
                             <x-auth-validation-errors class="mb-4" :errors="$errors" />
-                            <form method="POST" action="{{route('complaint.send')}}" class="row" enctype="multipart/form-data" >
+                            <form method="POST" action="{{route('complaint.send')}}" class="row" enctype="multipart/form-data" novalidate>
                                 @csrf
                                 <!-- Complaint subject-->
                                 <div>
-                                    <label for="subject" class="form-label">Problēmas sagādā:</label>
+                                    <label for="subject" class="form-label">Par ko ir sūdzība? </label>
                                     <select id="subject" name="subject" class="form-select mb-3">
                                         <option value="0" disabled selected>Izvēlēties</option>
                                         @foreach ($subjects as $subject)
-                                            <option value="{{$subject->id}}" required>{{$subject->name}}</option>
+                                            <option value="{{$subject->id}}">{{$subject->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
 
                                 <!-- Complaint Content -->
                                 <div>
-                                    <label for="content" class="form-label">Sūdzības iemesls</label>
-                                    <textarea id="content" name="content" class="form-control" required></textarea>
+                                    <label for="complaintContent" class="form-label">Iemesls</label>
+                                    <textarea id="complaintContent" name="complaintContent" class="form-control"></textarea>
                                 </div>
 
                                 <!-- Buttons -->
                                 <div class="container">
                                     <div class="row mt-3">
-                                        <p class="col-auto"><button type="submit" class="btn btn-success">Nosūtīt Sūdzību</button></p>
+                                        <p class="col-auto"><button type="submit" class="btn btn-success">Nosūtīt sūdzību</button></p>
                                         <p class="col-auto"><a href="{{URL::previous()}}" class="btn btn-danger">Atcelt</a></p>
                                     </div>
                                 </div>

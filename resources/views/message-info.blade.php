@@ -20,7 +20,7 @@
                                 @if (Auth::user()->id === $message->receiver_id)
                                     <p class="col-auto"><a href="/user/{{$message->sender_id}}/compose-message" class="btn btn-primary">Atbildēt</a></p>
                                 @else
-                                    <p class="col-auto"><a href="/user/{{$message->receiver_id}}/compose-message" class="btn btn-primary">Rakstīt vēlvienu ziņu</a></p>
+                                    <p class="col-auto"><a href="/user/{{$message->receiver_id}}/compose-message" class="btn btn-primary">Rakstīt vēl vienu ziņu</a></p>
                                 @endif
                                 <div class="col-auto">
                                     @if (Auth::user()->id === $message->receiver_id)

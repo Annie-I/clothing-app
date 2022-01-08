@@ -28,7 +28,7 @@
             </div>
         </form>
         <!-- Buttons -->
-        <form class="ml-2" method="post" action="{{route('review.delete', $user)}}">
+        <form class="ml-2" method="post" action="{{route('review.delete', $review)}}">
             @csrf
             <button type="submit" class="btn btn-danger">Dzēst atsauksmi</p>
         </form>

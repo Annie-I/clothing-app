@@ -5,7 +5,7 @@
     @endif
     @foreach ($userMessages as $message)
         <div>
-            <li class="list-group-item">
+            <li class="list-group-item mb-1">
                 <p>
                 @if (!$message->read_at && $message->receiver_id === Auth::id())
                     <span class="badge bg-secondary">Nelasīts</span>

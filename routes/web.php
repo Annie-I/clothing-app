@@ -89,8 +89,7 @@ Route::post('/message/{message}/deleteReceived', [DashboardController::class, 'd
 Route::get('/blocked-users', [UserController::class, 'getBlockedUsers'])->middleware(['verified']); //add EnsureIsAdmin middleware
 
 //Block / unblock user
-Route::post('/user/{user}/block-user', [UserController::class, 'blockUser'])->middleware(['verified'])->name('user.block');  //add EnsureIsAdmin middleware
-Route::post('/user/{user}/unblock-user', [UserController::class, 'unblockUser'])->middleware(['verified'])->name('user.unblock');  //add EnsureIsAdmin middleware
+Route::post('/user/{user}/update-system-availability', [UserController::class, 'updateSystemAvailability'])->middleware(['verified'])->name('user.update.availability');  //add EnsureIsAdmin middleware
 
 //Write and send a complait to administration
 Route::get('/compose-complaint', [ComplaintController::class, 'viewFormToComposeComplaint'])->middleware(['verified']);
@@ -117,7 +116,7 @@ Route::get('/user/{user}/edit-review', [UserController::class, 'viewFormToEditRe
 Route::post('/user/{user}/edit-review', [UserController::class, 'postFormToEditReview'])->middleware(['verified'])->name('review.edit');
 
 //Delete review
-Route::post('/user/{user}/delete-review', [UserController::class, 'deleteReview'])->middleware(['verified'])->name('review.delete');
+Route::post('/review/{review}/delete-review', [UserController::class, 'deleteReview'])->middleware(['verified'])->name('review.delete');
 
 //View reviews left about the user
 Route::get('/user/{user}/all-reviews', [UserController::class, 'getAllReviewsAboutUser'])->middleware(['verified']);

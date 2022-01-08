@@ -70,9 +70,13 @@
             @endif
             {{-- Button for admin to block the user --}}
             @if (Auth::user()->is_admin && Auth::id() !== $user->id)
-                <form method="post" action="{{route('user.block', $user->id)}}" class="col-auto">
+                <form method="post" action="{{route('user.update.availability', $user->id)}}" class="col-auto">
                     @csrf
-                    <button type="submit" class="btn btn-danger">Bloķēt lietotāju</p>
+                    @if (!$user->is_blocked)
+                        <button type="submit" class="btn btn-danger">Liegt piekļuvi sistēmai</p>
+                    @else
+                        <button type="submit" class="btn btn-success">Atjaunot piekļuvi sistēmai</p>
+                    @endif
                 </form>
             @endif
         </div>

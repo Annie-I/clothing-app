@@ -2,16 +2,16 @@
     <x-slot name="content">
         <div class="container">
             <div class="card">
+                @if (session('message'))
+                    <div class="alert alert-success m-3">
+                        {{ session('message') }}
+                    </div>
+                @endif
                 <div class="card-body">
                     @if (isset($category)) 
                         <h5 class="text-capitalize">{{ $category->name }}</h5>
                     @else
                         <h5> Visi sludinājumi </h5>
-                    @endif
-                    @if (session('message'))
-                        <div class="alert alert-success">
-                            {{ session('message') }}
-                        </div>
                     @endif
                     <div class="row mt-10">
                         @if (count($items) === 0)

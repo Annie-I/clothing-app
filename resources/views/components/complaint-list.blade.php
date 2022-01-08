@@ -5,7 +5,7 @@
     @endif
     @foreach ($complaints as $complaint)
         <div>
-            <li class="list-group-item">
+            <li class="list-group-item mb-1">
                 <a href="/complaint/{{$complaint->id}}/view" class="text-decoration-none text-body">
                     <p class="mb-1">
                         Iesniedza: <span class="fw-bold">{{$complaint->user->first_name}} {{$complaint->user->last_name}}</span>

@@ -1,5 +1,5 @@
 {{-- Edit user info --}}
-<div class="card">
+{{-- <div class="card">
     <div class="card-body fs-5">
         <h2 class="card-title fs-3">Labot manus datus</h2>
 
@@ -41,4 +41,4 @@
             </div>
         </form>
     </div>
-</div>
+</div> --}}
