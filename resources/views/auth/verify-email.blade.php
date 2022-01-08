@@ -1,11 +1,12 @@
 {{-- The only view that logged in user with unverified email adress can see --}}
 <x-app-layout>
     <x-slot name="content">
-        <div class="container">
-            <div class="card">
-                <div class="container mt-3">
-                    <h2 class="card-title fs-3 m-2">Jūsu konts ir izveidots!</h2>
+        <div class="container d-flex justify-content-center pt-3">
+            <div class="card solo-card">
+                <div class="container">
                     <div class="card-body fs-5">
+                        <h2 class="card-title fs-4">Jūsu konts ir izveidots!</h2>
+                        <hr>
                         <p>
                             Lai pabeigtu reģistrāciju, lūdzu, pārbaudiet savu e-pastu un sekojiet tur norādītajām instrukcijām. 
                             Ja pēc dažām minūtēm aizvien neesat saņēmis ziņu, pieprasiet to nosūtīt atkārtoti.
@@ -19,7 +20,7 @@
 
                         <form method="POST" action="{{route('verification.send')}}">
                             @csrf
-                            <button type="submit" class="btn login_btn mr-3">Nosūtīt atkārtotu aktivizācijas epastu</a>
+                            <button type="submit" class="btn login_btn mr-3 full-width">Nosūtīt atkārtotu aktivizācijas epastu</a>
                         </form>
                     </div>
                 </div>

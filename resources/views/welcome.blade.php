@@ -7,6 +7,13 @@
                         {{ session('message') }}
                     </div>
                 @endif
+
+                @if (session('error'))
+                    <div class="alert alert-danger m-3">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                
                 <div class="card-body">
                     @if (isset($category)) 
                         <h1 class="text-capitalize fs-3 mb-3">{{ $category->name }}</h1>
