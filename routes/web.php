@@ -18,15 +18,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes(['verify' => true]);
-
+// Auth::routes(['verify' => true]);
 
 //Landing page
 Route::get('/', [ItemController::class, 'getAllItems']);
 
 //View single item
 Route::get('/item/{item}', [ItemController::class, 'getSingleItem']);
-
 
 // Verified user group
 Route::middleware(['verified'])->group(function () {

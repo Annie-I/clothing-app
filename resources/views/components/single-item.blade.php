@@ -14,7 +14,9 @@
         {{-- Item name --}}
         <h2 class="card-title fs-3">{{$item->name}}</h2>
         {{-- Item category --}}
-        <p class="text-capitalize">{{$category->name}}</p>
+        <p class="text-capitalize">
+            <a href="/?category={{$item->category->id}}">{{$item->category->name}}</a>
+        </p>
         <hr>
         <div class="row mb-4">
             {{-- Item picture --}}
