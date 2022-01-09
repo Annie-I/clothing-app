@@ -27,7 +27,7 @@ class ItemFactory extends Factory
             'name' => $this->faker->text($maxNbChars = 100),
             'price' => $this->faker->numberBetween($min = 0, $max = 10000),
             'state_id' => $this->faker->numberBetween($min = 1, $max = 3),
-            'image_path' => 'public/images/fdaNK1xdvgREwCDThM4Cr3kL2o3bgFJDY6QuizUc.jpg',
+            'image_path' => 'public/test-images/'.$this->faker->numberBetween($min = 1, $max = 10).'.jpg',
             'description' => $this->faker->text($minNbChars = 10, $maxNbChars = 2500),
             'category_id' => $this->faker->numberBetween($min = 1, $max = 19),
         ];
