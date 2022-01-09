@@ -74,7 +74,7 @@
             @endif
             {{-- If other user who is not an admin is viewing this: --}}
             @if (!Auth::user()->is_admin && Auth::user()->id !== $item->user_id)
-                <a href="/compose-complaint" class="btn btn-danger full-width">Ziņot par pārkāpumu</a>
+                <a href="/compose-complaint" class="btn btn-danger full-width align-top">Ziņot par pārkāpumu</a>
             @endif
         @else
             <p>Lai nosūtītu ziņu mantas īpašniekam, nepieciešams <a href="/login" class="text-body fw-bold">pieteikties sistēmā</a>.</p>
