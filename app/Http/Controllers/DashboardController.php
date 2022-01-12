@@ -97,7 +97,7 @@ class DashboardController extends Controller
 
     public function addToFavorites(User $user)
     {
-        // User can't add himself to his favorite list
+        // User can't add themselves to their favorite list
         if (Auth::id() === $user->id) {
             return back()->with('error', 'Jūs nevarat pievienot sevi favorītu sarakstam!');
         }
@@ -106,10 +106,10 @@ class DashboardController extends Controller
                             ->whereNull('deleted_at')
                             ->get();
 
-        //Check if user is already added as favorite
+        // Check if user is already added as a favorite
         $isFavorited = Auth::user()->favorites()->firstWhere('favorite_id', $user->id);
 
-        //user can be added to favorites only if he has at least one item and is not already added to favorite list
+        // User can be added to favorites only if he has at least one item and is not already added to favorite list
         if (count($userItems) && !$isFavorited) {
             Auth::user()->favorites()->attach($user->id);
             return back()->with('message', 'Lietotājs pievienots favorītiem!');
@@ -129,10 +129,13 @@ class DashboardController extends Controller
     public function addItemToSale(Request $request)
     {
         $request->validate([
-            'picture' => ['required', 'image', 'max:10240'], //max image size is 10MB
+            //max image size is 10MB
+            'picture' => ['required', 'image', 'max:10240'],
             'name' => ['required', 'string', 'max:150'],
-            'category' => ['required', 'integer', 'min:1', 'max:19'], //1 - 19 are category foreign keys 
-            'state' => ['required', 'integer', 'min:1', 'max:3'], //1 - 3 are state foreign keys 
+            //1 - 19 are category foreign keys 
+            'category' => ['required', 'integer', 'min:1', 'max:19'],
+            //1 - 3 are state foreign keys 
+            'state' => ['required', 'integer', 'min:1', 'max:3'],
             'price' => ['required', 'numeric', 'min:0', 'max:10000'],
             'description' => ['required', 'string', 'min:10', 'max:2500'],
         ]);

@@ -12,8 +12,10 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
+    // Return items that are for sale
     public function getAllItems(Request $request) 
     {
+        // If user selects item a category, return items only from that category
         if ($request->query('category')) {
             return view('welcome', [
                 'items' => Item::with(['state', 'user'])->whereNull('sold_at')->where('category_id', $request->query('category'))->get(),
@@ -21,6 +23,7 @@ class ItemController extends Controller
             ]);
         }
         
+        // Return all items
         return view('welcome', [
             'items' => Item::with(['state', 'user'])->whereNull('sold_at')->get(),
         ]);
@@ -89,6 +92,7 @@ class ItemController extends Controller
         abort(403);
     }
 
+    // Change item status to sold or in sale
     public function changeItemSaleStatus(Item $item) 
     {
         if (Auth::id () === $item->user_id) {

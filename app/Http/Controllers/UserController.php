@@ -98,6 +98,7 @@ class UserController extends Controller
         ]);
     }
 
+    // Block or unblock user
     public function updateSystemAvailability (User $user)
     {
         if (Auth::user()->is_admin) {
@@ -142,6 +143,7 @@ class UserController extends Controller
         abort(403);
     }
 
+    // User adds review
     public function postFormToAddReview(Request $request, User $user)
     {
         $sentMessages = Message::where('sender_id', Auth::id())
@@ -152,13 +154,16 @@ class UserController extends Controller
             ->where('receiver_id', Auth::id())
             ->get();
 
+        // Count messages that user has sent or received from user they are reviewing
         $hasCommunicated = count($sentMessages) + count($receivedMessages);
 
+        // Check if review already exists
         $review = Review::where('user_id', Auth::id())
                         ->where('receiver_id', $user->id)
                         ->whereNull('deleted_at')
                         ->first();
 
+        // If user has communicated and hasn't reviewed already
         if ($hasCommunicated && !$review) {
             $request->validate([
                 'rating' => ['required', 'integer', 'min:0', 'max:5'],
